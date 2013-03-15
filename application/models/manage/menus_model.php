@@ -18,17 +18,18 @@ class Menus_model extends CI_Model {
 	/*function getNews($id) {
 		$news = $this->db->query ( "SELECT * FROM news WHERE id='{$id}'" )->result ();
 		return $news [0];
-	}
-	function deleteNews($ids) {
-		$this->db->query ( "DELETE FROM news WHERE id IN ($ids)" );
-	}
-	function add($title, $content, $copyWriter) {
-		$id = uniqid ();
-		$this->db->query ( "INSERT INTO news(id,title,content,copyWriter,createTime) VALUES('" . $id . "','" . $title . "','" . $content . "','" . $copyWriter . "',now())" );
-	}
-	function edit($id, $title, $content, $copyWriter) {
-		$this->db->query ( "UPDATE news SET title='" . $title . "',content='" . $content . "',copyWriter='" . $copyWriter . "' WHERE id='" . $id . "'" );
 	}*/
+	function deleteMenu($id) {
+		$childCount = $this->db->query ( "SELECT count(1) FROM web_menutemp WHERE fid='{$id}'" )->result ();
+		//判断是否有子节点，若有不能删除
+		$this->db->query ( "DELETE FROM web_menutemp WHERE id='".$id."'" );
+	}
+	function add($pid,$name, $type) {
+		$this->db->query ( "INSERT INTO web_menutemp(fid,type,name) VALUES('" . $pid . "','" . $type . "' ,'" . $name . "')");
+	}
+	function edit($id,$name, $type) {
+		$this->db->query ( "UPDATE web_menutemp SET name='" . $name . "',type='" . $type . "' WHERE id='" . $id . "'" );
+	}
 }
 class Tree{
 	var $id;
