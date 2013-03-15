@@ -1,4 +1,4 @@
-<script type="text/javascript"
+﻿<script type="text/javascript"
 	src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>
 <div id="treeToolbar">
 	<a id="addRoot" class="easyui-linkbutton" iconCls="icon-add">新增顶级菜单</a>
@@ -23,7 +23,7 @@
                 <ul class="popSort">
                     <li>
                         <label class="popLab">
-                            容纳人数：	</label>
+                            类型：	</label>
                             <select id="menuType">
 								<option value="">--请选择--</option>
 								<option value="1">新闻</option>
