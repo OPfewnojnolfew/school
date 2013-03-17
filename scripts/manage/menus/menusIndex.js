@@ -7,12 +7,12 @@ $(function(){
         nowrap: false,
         animate: true,
         collapsible: true,
-        url: "/school/index.php/manage/menus/initData",
+        url: global._prefix+"/manage/menus/initData",
         idField: 'id',
         treeField: 'name',
         singleSelect: true,
-        height: 450,
-        resizable:true,
+        //height: 450,
+        width:700,
         loadMsg: "数据加载中，请稍后...",
         //queryParams: { name: ($("#Name").val()).trim(), begin: $("#BeginTime").val(), end: $("#EndTime").val() },
         frozenColumns: [[
@@ -40,7 +40,8 @@ $(function(){
                 ]],
         onClickRow: function (row) {
             $("#tree").treegrid("unselect", row.id);
-        }
+        },
+        pagination:true
     });
     $("#win").window({
     	closed:true
@@ -76,7 +77,7 @@ $(function(){
     	$("#hdnIsAdd").val("0");
     });
     $("#btnSure").click(function(){
-    	$.post("/school/index.php/manage/menus/addOrEdit",{name:$("#name").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
+    	$.post(global._prefix+"/manage/menus/addOrEdit",{name:$("#name").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
     		$("#win").window("close");
     		reloadTree();
     	})
@@ -93,9 +94,14 @@ $(function(){
     	}
     	$.messager.confirm("提示框","确定删除吗？",function(r){
     		if(r){
-    			$.post("/school/index.php/manage/menus/del",{id:selectedNode.id},function(){
+    			$.post(global._prefix+"/manage/menus/del",{id:selectedNode.id},function(res){
+                    var res=eval("("+res+")");
+                    if(res==="1"){
     	    		$("#win").window("close");
     	    		reloadTree();
+                    }else{
+                        $.messager.alert("提示框",res.errorMessage);
+                    }
     	    	})
     		}
     	})
