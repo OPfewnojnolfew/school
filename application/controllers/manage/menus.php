@@ -17,12 +17,13 @@ class menus extends CI_Controller {
 		$name = $this->input->post ( 'name' );
 		$type = $this->input->post ( 'type' );
 		$isAdd = $this->input->post ( 'isAdd' );
+        $url = $this->input->post ( 'url' );
 		if($isAdd=="1"){
-			$this->Menus_model->add($id,$name,$type);
+			$this->Menus_model->add($id,$name,$type,$url);
 		}
 		else
 		{
-			$this->Menus_model->edit ($id,$name,$type);
+			$this->Menus_model->edit ($id,$name,$type,$url);
 		}
 	}
 	public function del(){

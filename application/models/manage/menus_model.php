@@ -4,7 +4,7 @@ class Menus_model extends CI_Model {
 		parent::__construct ();
 	}
 	function queryData() {
-		$query = $this->db->query ( "SELECT id,name,( CASE pid WHEN '0' THEN '' ELSE pid END) as _parentId,type,isValid,createTime FROM web_menutemp" );
+		$query = $this->db->query ( "SELECT id,name,url,( CASE pid WHEN '0' THEN '' ELSE pid END) as _parentId,type,isValid,createTime FROM web_menutemp" );
         return json_encode(array(
             'total' => $query->num_rows,
             'rows'  => $query->result_array(),
@@ -29,17 +29,19 @@ class Menus_model extends CI_Model {
             'type'  => "1"
         ));
 	}
-	function add($pid,$name, $type) {
+	function add($pid,$name, $type,$url) {
         $data = array(
             'pid' => $pid,
             'type' => $type ,
-            'name' => $name
+            'name' => $name,
+            'url'=>$url
         );
         $this->db->insert('web_menutemp', $data);	}
-	function edit($id,$name, $type) {
+	function edit($id,$name, $type,$url) {
         $data = array(
             'type' => $type ,
-            'name' => $name
+            'name' => $name,
+            'url'=>$url
         );
         $this->db->where('id', $id);
         $this->db->update('web_menutemp', $data);

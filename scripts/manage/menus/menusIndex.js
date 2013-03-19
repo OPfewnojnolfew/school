@@ -74,10 +74,11 @@ $(function(){
     	$("#hdnID").val(selectedNode.id);
     	$("#name").val(selectedNode.name);
     	$("#menuType").val(selectedNode.type);
+        $("#pageUrl").val(selectedNode.url);
     	$("#hdnIsAdd").val("0");
     });
     $("#btnSure").click(function(){
-    	$.post(global._prefix+"/manage/menus/addOrEdit",{name:$("#name").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
+    	$.post(global._prefix+"/manage/menus/addOrEdit",{name:$("#name").val(),url:$("#pageUrl").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
     		$("#win").window("close");
     		reloadTree();
     	})
@@ -96,7 +97,7 @@ $(function(){
     		if(r){
     			$.post(global._prefix+"/manage/menus/del",{id:selectedNode.id},function(res){
                     var res=eval("("+res+")");
-                    if(res==="1"){
+                    if(res.type==="1"){
     	    		$("#win").window("close");
     	    		reloadTree();
                     }else{
@@ -112,4 +113,5 @@ function clear(){
 	$("#hdnID").val("");
 	$("#name").val("");
 	$("#menuType").val("");
+    $("#pageUrl").val("");
 }
