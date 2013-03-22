@@ -5,7 +5,6 @@ $(function(){
     $("#tree").treegrid({
         title: '菜单管理',
         nowrap: false,
-        animate: true,
         collapsible: true,
         url: global._prefix+"/manage/menus/initData",
         idField: 'id',
@@ -38,8 +37,8 @@ $(function(){
                     },
                     { field: "createTime", title: "创建时间", width: 180 }
                 ]],
-        onClickRow: function (row) {
-            $("#tree").treegrid("unselect", row.id);
+        onLoadSuccess:function(){
+            $("#tree").treegrid("unselectAll");
         },
         pagination:true
     });

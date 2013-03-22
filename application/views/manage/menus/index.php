@@ -8,7 +8,7 @@
 </div>
 <div id="tree" toolbar="#treeToolbar"></div> 
 <div id="win" class="easyui-window" title="菜单管理" closed="true" collapsible="false" minimizable="false" maximizable="false"
-    style="width: 550px; height: 300px;">
+    style="width: 400px; height: 300px;">
     <input type="hidden" id="hdnIsAdd">
     <input type="hidden" id="hdnID">
     <div class="easyui-layout" fit="true">
