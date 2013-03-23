@@ -1,6 +1,4 @@
-﻿<script type="text/javascript"
-	src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>
-<div id="treeToolbar">
+﻿<div id="treeToolbar">
 	<a id="addRoot" class="easyui-linkbutton" iconCls="icon-add">新增顶级菜单</a>
 	<a id="addChild" class="easyui-linkbutton" iconCls="icon-add">新增下级菜单</a>
 	<a id="edit" class="easyui-linkbutton" iconCls="icon-edit">编辑</a>
@@ -43,3 +41,4 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>

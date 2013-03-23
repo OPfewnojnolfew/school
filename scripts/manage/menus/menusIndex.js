@@ -11,7 +11,6 @@ $(function(){
         treeField: 'name',
         singleSelect: true,
         //height: 450,
-        width:700,
         loadMsg: "数据加载中，请稍后...",
         //queryParams: { name: ($("#Name").val()).trim(), begin: $("#BeginTime").val(), end: $("#EndTime").val() },
         frozenColumns: [[
@@ -41,8 +40,7 @@ $(function(){
                 ]],
         onLoadSuccess:function(){
             $("#tree").treegrid("unselectAll");
-        },
-        pagination:true
+        }
     });
     $("#win").window({
     	closed:true
