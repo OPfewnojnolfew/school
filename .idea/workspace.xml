@@ -5,22 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29f8a371-d10c-461b-a282-87602a9063ef" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/core/MY_Controller.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/manage/news/normalList.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/manage/base_Model.php" afterPath="$PROJECT_DIR$/application/models/manage/base_Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/manage/common.js" afterPath="$PROJECT_DIR$/scripts/manage/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/database.php" afterPath="$PROJECT_DIR$/application/config/database.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/manage/menus/index.php" afterPath="$PROJECT_DIR$/application/views/manage/menus/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/manage/layout_main.php" afterPath="$PROJECT_DIR$/application/views/manage/layout_main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/manage/menus/menusIndex.js" afterPath="$PROJECT_DIR$/scripts/manage/menus/menusIndex.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/manage/menus/menusTree.js" afterPath="$PROJECT_DIR$/scripts/manage/menus/menusTree.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/manage/menus_model.php" afterPath="$PROJECT_DIR$/application/models/manage/menus_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/manage/news.php" afterPath="$PROJECT_DIR$/application/controllers/manage/news.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="school.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="29f8a371-d10c-461b-a282-87602a9063ef" time="1364005713097" ignored="false" />
+    <file path="/Dummy.txt" changelist="29f8a371-d10c-461b-a282-87602a9063ef" time="1364013873009" ignored="false" />
     <file path="/menus_model.php" changelist="29f8a371-d10c-461b-a282-87602a9063ef" time="1364007182998" ignored="false" />
     <file path="/menusIndex.js" changelist="29f8a371-d10c-461b-a282-87602a9063ef" time="1363784637764" ignored="false" />
     <file path="/menus.php" changelist="29f8a371-d10c-461b-a282-87602a9063ef" time="1363702413358" ignored="false" />
@@ -62,7 +51,7 @@
     <favorites_list name="school" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.27996647">
+    <splitter split-orientation="horizontal" split-proportion="0.45347863">
       <split-first>
         <leaf>
           <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
@@ -92,10 +81,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="news.php" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="news.php" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/controllers/manage/news.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="8" column="29" selection-start="252" selection-end="252" vertical-scroll-proportion="0.15341702">
+                <state line="8" column="29" selection-start="252" selection-end="252" vertical-scroll-proportion="-3.548387">
                   <folding />
                 </state>
               </provider>
@@ -119,10 +108,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="menusTree.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="menusTree.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/scripts/manage/menus/menusTree.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="19.6">
+                <state line="0" column="0" selection-start="0" selection-end="39" vertical-scroll-proportion="0.0">
                   <folding>
                     <element signature="n#!!block;n#addDiyDom#0" expanded="false" />
                     <marker date="1364011989319" expanded="true" signature="1285:1313" placeholder="..." />
@@ -189,10 +178,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MY_Controller.php" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="MY_Controller.php" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/core/MY_Controller.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="13" column="5" selection-start="399" selection-end="399" vertical-scroll-proportion="0.35135135">
+                <state line="8" column="23" selection-start="238" selection-end="238" vertical-scroll-proportion="-5.677419">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="menus.php" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/application/controllers/manage/menus.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -553,24 +551,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="school">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="application">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="config">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="ProjectPane">
@@ -661,7 +641,11 @@
       <created>1364005718779</created>
       <updated>1364005718779</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="菜单改成ztree">
+      <created>1364013876049</created>
+      <updated>1364013876049</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -693,7 +677,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944787" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26988983" sideWeight="0.67049366" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26988983" sideWeight="0.67049366" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -773,13 +757,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/models/manage/base_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="39" selection-start="501" selection-end="501" vertical-scroll-proportion="-4.714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/manage/news/addOrEdit.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -836,26 +813,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/manage/menus/menusTree.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="19.6">
-          <folding>
-            <element signature="n#!!block;n#addDiyDom#0" expanded="false" />
-            <marker date="1364011989319" expanded="true" signature="1285:1313" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/manage/menus/menusIndex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="50" selection-start="766" selection-end="766" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/manage/news.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="29" selection-start="252" selection-end="252" vertical-scroll-proportion="0.15341702">
           <folding />
         </state>
       </provider>
@@ -883,8 +843,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/core/MY_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="5" selection-start="399" selection-end="399" vertical-scroll-proportion="0.35135135">
+        <state line="8" column="23" selection-start="238" selection-end="238" vertical-scroll-proportion="-5.677419">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/manage/menus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/manage/news.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="29" selection-start="252" selection-end="252" vertical-scroll-proportion="-3.548387">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/manage/menus/menusTree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="39" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!block;n#addDiyDom#0" expanded="false" />
+            <marker date="1364011989319" expanded="true" signature="1285:1313" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
