@@ -1,14 +1,19 @@
 <?php
-class News extends CI_Controller {
+class News extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'manage/News_model' );
 		$this->load->library ( 'Layout_manage' );
 		$this->load->helper ( 'url' );
 	}
-	public function index() {
-		$this->layout_manage->view ( "manage/news/index" );
+	public function index()
+    {
+        $this->load->view('manage/news/index');
 	}
+    public function newList()
+    {
+        $this->load->view('manage/news/normalList');
+    }
 	public function edit() {
 		$id = $this->input->get ( 'id' );
 		$data ["news"] = $this->News_model->getNews ( $id );

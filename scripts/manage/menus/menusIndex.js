@@ -11,7 +11,6 @@ $(function(){
         treeField: 'name',
         singleSelect: true,
         //height: 450,
-        width:700,
         loadMsg: "数据加载中，请稍后...",
         //queryParams: { name: ($("#Name").val()).trim(), begin: $("#BeginTime").val(), end: $("#EndTime").val() },
         frozenColumns: [[
@@ -23,13 +22,15 @@ $(function(){
                     	formatter:function(value){
                     		switch(value){
                     			case "1":
-                    				return "新闻";
-                    			case "2":
                     				return "简介";
+                    			case "2":
+                    				return "一般列表";
                     			case "3":
-                    				return "图片";
-                    			case "4":
-                    				return "视频";
+                    				return "图片或视频列表";
+                    			case "5":
+                    				return "附件列表";
+                                case "6":
+                                    return "主从列表";
                     			default:
                     				return "";
                     		}
@@ -39,8 +40,7 @@ $(function(){
                 ]],
         onLoadSuccess:function(){
             $("#tree").treegrid("unselectAll");
-        },
-        pagination:true
+        }
     });
     $("#win").window({
     	closed:true
@@ -73,11 +73,10 @@ $(function(){
     	$("#hdnID").val(selectedNode.id);
     	$("#name").val(selectedNode.name);
     	$("#menuType").val(selectedNode.type);
-        $("#pageUrl").val(selectedNode.url);
     	$("#hdnIsAdd").val("0");
     });
     $("#btnSure").click(function(){
-    	$.post(global._prefix+"/manage/menus/addOrEdit",{name:$("#name").val(),url:$("#pageUrl").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
+    	$.post(global._prefix+"/manage/menus/addOrEdit",{name:$("#name").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
     		$("#win").window("close");
     		reloadTree();
     	})
@@ -92,7 +91,7 @@ $(function(){
     		$.messager.alert("提示框","请选择要编辑的项");
     		return;
     	}
-    	$.messager.confirm("提示框","确定删除吗？",function(r){
+    	$.messager.confirm("提示框","该菜单下的数据可能会被删除！确定删除吗？",function(r){
     		if(r){
     			$.post(global._prefix+"/manage/menus/del",{id:selectedNode.id},function(res){
                     var res=eval("("+res+")");
@@ -112,5 +111,4 @@ function clear(){
 	$("#hdnID").val("");
 	$("#name").val("");
 	$("#menuType").val("");
-    $("#pageUrl").val("");
 }

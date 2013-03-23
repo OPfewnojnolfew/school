@@ -1,13 +1,12 @@
 <?php
-class menus extends CI_Controller {
+class menus extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'manage/Menus_model' );
-		$this->load->library ( 'Layout_manage' );
 		$this->load->helper ( 'url' );
 	}
 	public function index() {
-		$this->layout_manage->view ( "manage/menus/index" );
+		$this->load->view ( "manage/menus/index" );
 	}
 	public function initData() {
 		echo $this->Menus_model->queryData ();
@@ -17,13 +16,12 @@ class menus extends CI_Controller {
 		$name = $this->input->post ( 'name' );
 		$type = $this->input->post ( 'type' );
 		$isAdd = $this->input->post ( 'isAdd' );
-        $url = $this->input->post ( 'url' );
 		if($isAdd=="1"){
-			$this->Menus_model->add($id,$name,$type,$url);
+			$this->Menus_model->add($id,$name,$type);
 		}
 		else
 		{
-			$this->Menus_model->edit ($id,$name,$type,$url);
+			$this->Menus_model->edit ($id,$name,$type);
 		}
 	}
 	public function del(){

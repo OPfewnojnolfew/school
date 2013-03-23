@@ -1,6 +1,4 @@
-﻿<script type="text/javascript"
-	src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>
-<div id="treeToolbar">
+﻿<div id="treeToolbar">
 	<a id="addRoot" class="easyui-linkbutton" iconCls="icon-add">新增顶级菜单</a>
 	<a id="addChild" class="easyui-linkbutton" iconCls="icon-add">新增下级菜单</a>
 	<a id="edit" class="easyui-linkbutton" iconCls="icon-edit">编辑</a>
@@ -23,19 +21,15 @@
                 <ul class="popSort">
                     <li>
                         <label class="popLab">
-                            页面地址：</label><input type="text" class="popupText" id="pageUrl" />
-                    </li>
-                </ul>
-                <ul class="popSort">
-                    <li>
-                        <label class="popLab">
                             类型：	</label>
                             <select id="menuType">
 								<option value="">--请选择--</option>
-								<option value="1">新闻</option>
-								<option value="2">简介</option>
-								<option value="3">图片</option>
-								<option value="4">视频</option>
+								<option value="1">简介</option>
+								<option value="2">一般列表</option>
+								<option value="3">图片和视频列表</option>
+								<option value="4">链接列表</option>
+                                <option value="4">附件列表</option>
+                                <option value="4">主从列表</option>
 							</select>
 	
 					</li>
@@ -47,3 +41,4 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>
