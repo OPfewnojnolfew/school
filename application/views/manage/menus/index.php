@@ -23,12 +23,6 @@
                 <ul class="popSort">
                     <li>
                         <label class="popLab">
-                            页面地址：</label><input type="text" class="popupText" id="pageUrl" />
-                    </li>
-                </ul>
-                <ul class="popSort">
-                    <li>
-                        <label class="popLab">
                             类型：	</label>
                             <select id="menuType">
 								<option value="">--请选择--</option>

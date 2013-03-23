@@ -1,3 +1,4 @@
 var global = {
-		_prefix : "/school"
+		_prefix : "/school",
+        baseUrl:"/manage/menus"
 }

@@ -5,7 +5,10 @@ class base extends CI_Controller {
         $this->load->model ( 'manage/Base_model' );
         $this->load->helper ( 'url' );
     }
-    public function getMenus() {
-        echo $this->Base_model->getMenus ();
+//    public function getMenus() {
+//        echo $this->Base_model->getMenus ();
+//    }
+    public  function  getZtreeMenus(){
+        echo $this->Base_model->getZtreeMenus ();
     }
 }

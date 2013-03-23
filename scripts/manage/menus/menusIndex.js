@@ -73,11 +73,10 @@ $(function(){
     	$("#hdnID").val(selectedNode.id);
     	$("#name").val(selectedNode.name);
     	$("#menuType").val(selectedNode.type);
-        $("#pageUrl").val(selectedNode.url);
     	$("#hdnIsAdd").val("0");
     });
     $("#btnSure").click(function(){
-    	$.post(global._prefix+"/manage/menus/addOrEdit",{name:$("#name").val(),url:$("#pageUrl").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
+    	$.post(global._prefix+"/manage/menus/addOrEdit",{name:$("#name").val(),type:$("#menuType").val(),id:$("#hdnID").val(),isAdd:$("#hdnIsAdd").val()},function(){
     		$("#win").window("close");
     		reloadTree();
     	})
@@ -92,7 +91,7 @@ $(function(){
     		$.messager.alert("提示框","请选择要编辑的项");
     		return;
     	}
-    	$.messager.confirm("提示框","确定删除吗？",function(r){
+    	$.messager.confirm("提示框","该菜单下的数据可能会被删除！确定删除吗？",function(r){
     		if(r){
     			$.post(global._prefix+"/manage/menus/del",{id:selectedNode.id},function(res){
                     var res=eval("("+res+")");
@@ -112,5 +111,4 @@ function clear(){
 	$("#hdnID").val("");
 	$("#name").val("");
 	$("#menuType").val("");
-    $("#pageUrl").val("");
 }
