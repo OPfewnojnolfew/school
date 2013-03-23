@@ -4,7 +4,7 @@ class Menus_model extends CI_Model {
 		parent::__construct ();
 	}
 	function queryData() {
-		$query = $this->db->query ( "SELECT id,name,( CASE pid WHEN '0' THEN '' ELSE pid END) as _parentId,type,isValid,createTime FROM web_menutemp" );
+		$query = $this->db->query ( "SELECT id,name,( CASE pid WHEN '0' THEN '' ELSE pid END) as _parentId,type,isValid,createTime FROM menus" );
         return json_encode(array(
             'total' => $query->num_rows,
             'rows'  => $query->result_array(),
@@ -15,7 +15,7 @@ class Menus_model extends CI_Model {
 		return $news [0];
 	}*/
 	function deleteMenu($id) {
-        $query = $this->db->query ( "SELECT count(1) as childCount FROM web_menutemp WHERE pid='{$id}'" )->first_row();
+        $query = $this->db->query ( "SELECT count(1) as childCount FROM menus WHERE pid='{$id}'" )->first_row();
 		//判断是否有子节点，若有不能删除
         if(isset($query->childCount) && $query->childCount >0){
             return json_encode(array(
@@ -23,7 +23,7 @@ class Menus_model extends CI_Model {
                 'type'  => "0"
             ));
         }
-        $this->db->delete('web_menutemp', array('id' => $id));
+        $this->db->delete('menus', array('id' => $id));
         return json_encode(array(
             'errorMessage' => "",
             'type'  => "1"
@@ -35,13 +35,13 @@ class Menus_model extends CI_Model {
             'type' => $type ,
             'name' => $name
         );
-        $this->db->insert('web_menutemp', $data);	}
+        $this->db->insert('menus', $data);	}
 	function edit($id,$name, $type) {
         $data = array(
             'type' => $type ,
             'name' => $name
         );
         $this->db->where('id', $id);
-        $this->db->update('web_menutemp', $data);
+        $this->db->update('menus', $data);
 	}
 }

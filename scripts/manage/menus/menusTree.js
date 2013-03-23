@@ -16,7 +16,7 @@ var setting = {
             enable: true,
             idKey:"id",
             pIdKey:"pid",
-            rootPid:""
+            rootPid:"0"
         }
     },
     callback: {
@@ -30,7 +30,7 @@ var setting = {
         },
         onClick:function(event,treeId,treeNode){
             if(!treeNode.isParent||treeNode.type==="0"){
-                location.href=global._prefix+global.baseUrl+"?menuId="+treeNode.id+"&type="+treeNode.type;
+                location.href=global._prefix+global._baseUrl+"?menuId="+treeNode.id+"&type="+treeNode.type;
             }
         }
     }

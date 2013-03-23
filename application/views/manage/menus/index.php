@@ -26,10 +26,12 @@
                             类型：	</label>
                             <select id="menuType">
 								<option value="">--请选择--</option>
-								<option value="1">新闻</option>
-								<option value="2">简介</option>
-								<option value="3">图片</option>
-								<option value="4">视频</option>
+								<option value="1">简介</option>
+								<option value="2">一般列表</option>
+								<option value="3">图片和视频列表</option>
+								<option value="4">链接列表</option>
+                                <option value="4">附件列表</option>
+                                <option value="4">主从列表</option>
 							</select>
 	
 					</li>

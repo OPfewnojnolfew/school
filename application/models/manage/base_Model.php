@@ -4,13 +4,12 @@ class Base_model extends CI_Model {
 		parent::__construct ();
 	}
     function getZtreeMenus(){
-        $menus = $this->db->query ( "SELECT id,name,pid,type,isValid,createTime FROM web_menutemp" )->result_array();
+        $menus = $this->db->query ( "SELECT id,name,pid,type,isValid,createTime FROM menus" )->result_array();
         return json_encode($menus);
     }
 //	function getMenus() {
-//        $menus = $this->db->query ( "SELECT id,name as text,pid,type,isValid,createTime,url FROM web_menutemp" )->result_array();
+//        $menus = $this->db->query ( "SELECT id,name as text,pid,type,isValid,createTime FROM menus" )->result_array();
 //        foreach($menus as &$val){
-//            $val["attributes"]=array("url"=>$val["url"]);
 //            $val["children"]=array();
 //        }
 //        $resultMenus=array();

@@ -23,13 +23,15 @@ $(function(){
                     	formatter:function(value){
                     		switch(value){
                     			case "1":
-                    				return "新闻";
-                    			case "2":
                     				return "简介";
+                    			case "2":
+                    				return "一般列表";
                     			case "3":
-                    				return "图片";
-                    			case "4":
-                    				return "视频";
+                    				return "图片或视频列表";
+                    			case "5":
+                    				return "附件列表";
+                                case "6":
+                                    return "主从列表";
                     			default:
                     				return "";
                     		}

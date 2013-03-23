@@ -7,6 +7,12 @@ class News extends CI_Controller {
 		$this->load->helper ( 'url' );
 	}
 	public function index() {
+        $data["menuId"] =$this->input->post ( 'menuId' );
+        $type = $this->input->post ( 'type' );
+        switch($type){
+            case "2":
+                $this->layout_manage->view ( "manage/news/normalList" );
+        }
 		$this->layout_manage->view ( "manage/news/index" );
 	}
 	public function edit() {
