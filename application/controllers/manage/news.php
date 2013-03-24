@@ -12,7 +12,16 @@ class News extends MY_Controller {
 	}
     public function newList()
     {
-        $this->load->view('manage/news/normalList');
+        $params=$this->uri->uri_to_assoc(4);
+        $data["menuid"]=$params["menuid"];
+        //$this->load->view('manage/news/normalList');
+        switch($params["type"]){
+            case 2:
+               // print_r($params);return;
+                $this->load->view('manage/news/normalList',$data);
+                break;
+        }
+
     }
 	public function edit() {
 		$id = $this->input->get ( 'id' );

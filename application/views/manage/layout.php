@@ -117,6 +117,8 @@
 <script type="text/javascript" src="<?php echo base_url();?>scripts/manage/common.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>scripts/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>scripts/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/normalList.js"></script>
 <script type="text/javascript" >
 $(function(){
     $('.sider li a').click(function(){
@@ -149,5 +151,6 @@ $(function(){
 
 
 </script>
+
 </body>
 </html>

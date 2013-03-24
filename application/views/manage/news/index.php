@@ -30,11 +30,12 @@
                             var nid = node.id;
                             var type=node.attributes.type;
                             //var clickclass = $('.tree_'+classId+' .tree-node-selected a');
-                            var url = '<?echo base_url()?>/manage/news/newList/id/'+nid+'/type/'+type+'/';
+                            var url = '<?echo base_url()?>/manage/news/newList/menuid/'+nid+'/type/'+type+'/';
                             //var classId = 'modelsortlist';
                             var subtitle = node.text;
                             if(!$('#tabs_'+classId).tabs('exists',subtitle)){
                                 $('#tabs_'+classId).tabs('add',{
+                                    id:global._tabIdPrefix+nid,
                                     title:subtitle,
                                     content:subtitle,
                                     closable:true,
@@ -60,3 +61,32 @@
         </div>
     </div>
 </div><!--pagecontent-->
+
+<!--window start-->
+<div id="normalListWin" class="easyui-window" title="菜单管理" closed="true" collapsible="false" minimizable="false" maximizable="false"
+     style="width: 400px; height: 300px;">
+    <input type="hidden" id="normalListMenuid">
+    <input type="hidden" id="normalListId">
+    <div class="easyui-layout" fit="true">
+        <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
+            <div class="popupCon">
+                <ul class="popSort">
+                    <li>
+                        <label class="popLab">
+                            标题：</label><input type="text" class="popupText" id="normalListTitle" />
+                    </li>
+                </ul>
+                <ul class="popSort">
+                    <li>
+                        <label class="popLab">
+                            内&#12288;&#12288;容：</label><textarea class="popupArea" id="normalListContent" name="normalListContent" style="width:382px;"></textarea></li>
+                </ul>
+            </div>
+            <div region="south" border="false" style="text-align: center; height: 30px; padding-top: 3px;">
+                <a class="easyui-linkbutton" id="normalListSave" href="javascript:void(0)">确定</a> <a class="easyui-linkbutton"
+                                                                                                     id="normalListCancel" href="javascript:void(0)">取消</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--window end-->
