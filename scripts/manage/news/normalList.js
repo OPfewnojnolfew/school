@@ -80,7 +80,7 @@ normalList={
             content:$("#normalListContent").val()
         }
         $.post(global._prefix+"/manage/news/addOrEditNormalList",postData,function(){
-            
+
         })
     },
     cancel:function(){
