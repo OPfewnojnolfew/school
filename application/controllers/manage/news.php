@@ -32,15 +32,24 @@ class News extends MY_Controller {
 		$this->layout_manage->view ( "manage/news/add" );
 	}
 	public function initData() {
-		$title = $this->input->post ( 'title' );
-		$begin = $this->input->post ( 'begin' );
-		$end = $this->input->post ( 'end' );
-		$page = $this->input->post ( 'page' );
-		$rows = $this->input->post ( 'rows' );
-		$order = $this->input->post ( 'order' );
-		$sort = $this->input->post ( 'sort' );
-		
-		echo $this->News_model->queryData ( $title, $begin, $end, ($page - 1) * $rows, $rows, $sort, $order );
+//		$title = $this->;
+//		$begin = $this->input->post ( 'begin' );
+//		$end = $this->input->post ( 'end' );
+//		$page = $this->input->post ( 'page' );
+//		$rows = $this->input->post ( 'rows' );
+//		$order = $this->input->post ( 'order' );
+//		$sort = $this->input->post ( 'sort' );
+		$array = array(
+            'menuid'        =>$this->input->post('menuid'),
+            'title'        => $this->input->post ( 'title' ),
+            'begin'          => $this->input->post ( 'begin' ),
+            'end'          => $this->input->post ( 'end' ),
+            'page'   =>$this->input->post ( 'page' ),
+            'rows'     =>$this->input->post ( 'rows' ),
+            'order'        => $this->input->post ( 'order' ),
+            'sort'          =>$this->input->post ( 'sort' ),
+        );
+		echo $this->News_model->queryData ($array);
 	}
 	public function deleteNews() {
 		try {
@@ -51,16 +60,26 @@ class News extends MY_Controller {
 			echo '0';
 		}
 	}
-	public function addOrEdit() {
+	public function addOrEditNormalList() {
+        try{
 		$id = $this->input->post ( 'id' );
 		$title = $this->input->post ( 'title' );
 		$content = $this->input->post ( 'content' );
-		$copyWriter = $this->input->post ( 'copyWriter' );
+        $menuid =$this->input->post ( 'menuid' );
+        $createid=$this->session->userdata('account_id');
 		if ($id == false) {
-			$this->News_model->add ( $title, $content, $copyWriter );
+			$this->News_model->addNormalList ( $title, $content,$menuid, $createid);
 		} else {
-			$this->News_model->edit ( $id, $title, $content, $copyWriter );
+			$this->News_model->editNormalList ( $id, $title, $content,$createid);
 		}
-		echo '1';
+            echo json_encode(array(
+                'errorMessage' => "",
+                'type'  => "1"
+            ));
+        }catch (Exception $e){
+        echo json_encode(array(
+            'errorMessage' => $e,
+            'type'  => "0"
+        ));}
 	}
 }

@@ -1,12 +1,17 @@
-normalList={
-    createTable: function (menuid){
-        $("#list"+menuid).datagrid({
+function NormalList(menuid){
+    this.menuid=menuid;
+}
+NormalList.prototype={
+    createTable: function (){
+        var _this=this;
+        $("#list"+this.menuid).datagrid({
             striped : true,
             idField : 'id',
             pagination : true,
-            sortName : 'id',
+            sortName : 'createtime',
             fitColumns : true,
-            url : global._prefix+"/manage/news/initData/",
+            url : global._prefix+"/manage/news/initData",
+            queryParams:{menuid:_this.menuid},
             frozenColumns : [ [ {
                 field : "ck",
                 checkbox : true
@@ -17,29 +22,31 @@ normalList={
                 width : 200,
                 sortable : true
             },
-                {
-                    field : "createTime",
-                    title : "创建时间",
-                    width : 120,
-                    sortable : true
-                }]],
+            {
+                field : "createtime",
+                title : "创建时间",
+                width : 120,
+                sortable : true
+            }]],
             onSortColumn : function() {
-                reloadList(menuid);
+                _this.reloadList();
             },
             onClickRow:function(rowIndex){
-                $("#list"+menuid).datagrid("unselectRow",rowIndex);
+                $("#list"+this.menuid).datagrid("unselectRow",rowIndex);
             }
         });
     },
-    reloadList:function (menuid){
-        $("#list"+menuid).datagrid("load", {
-            title : $("#title"+menuid).val(),
-            begin : $("#begin"+menuid).val(),
-            end : $("#end"+menuid).val()
+    reloadList:function (){
+        $("#list"+this.menuid).datagrid("load", {
+            title : $("#title"+this.menuid).val(),
+            begin : $("#begin"+this.menuid).val(),
+            end : $("#end"+this.menuid).val(),
+            menuid:this.menuid
         });
     },
-    mDel:function (menuid){
-        var rows = $("#list"+menuid).datagrid("getSelections");
+    mDel:function (){
+        var _this=this;
+        var rows = $("#list"+this.menuid).datagrid("getSelections");
         var deleteIds = [];
         for ( var i = 0; i < rows.length; i++) {
             deleteIds.push("'" + rows[i].id + "'");
@@ -51,7 +58,7 @@ normalList={
             if (r) {
                 $.post("/php/manage/news/deleteNews",{ids:deleteIds.toString()},function(res){
                     if(res==="1"){
-                        reloadList("<?php echo menuid;?>")
+                        _this.reloadList()
                     }
                 });
             }
@@ -59,41 +66,49 @@ normalList={
     },
     add:function add(){
         this.clear();
-        $("#normalListWin").window("open");
+        $("#normalListMenuid"+this.menuid).val(this.menuid);
+        $("#normalListWin"+this.menuid).window("open");
     },
-    edit:function (menuid){
-        var selectedNode=$("#list"+menuid).datagrid("getSelected");
+    edit:function (){
+        var selectedNode=$("#list"+this.menuid).datagrid("getSelected");
         if(selectedNode===null){
             $.messager.alert("提示框","请选择要编辑的项");
             return;
         }
-        $("#normalListId").val(selectedNode.id);
-        $("#normalListTitle").val(selectedNode.title);
-        $("#normalListContent").val(selectedNode.content);
-        $("#normalListWin").window("open");
+        $("#normalListId"+this.menuid).val(selectedNode.id);
+        $("#normalListTitle"+this.menuid).val(selectedNode.title);
+        $("#normalListContent"+this.menuid).val(selectedNode.content);
+        $("#normalListWin"+this.menuid).window("open");
     },
     save:function(){
+        var _this=this;
         var postData={
-            menuid:$("#normalListMenuid").val(),
-            id:$("#normalListId").val(),
-            title:$("#normalListTitle").val(),
-            content:$("#normalListContent").val()
+            menuid:$("#normalListMenuid"+this.menuid).val(),
+            id:$("#normalListId"+this.menuid).val(),
+            title:$("#normalListTitle"+this.menuid).val(),
+            content:$("#normalListContent"+this.menuid).val()
         }
-        $.post(global._prefix+"/manage/news/addOrEditNormalList",postData,function(){
-
+        $.post(global._prefix+"/manage/news/addOrEditNormalList",postData,function(res){
+            res=eval("("+res+")");
+            if(res.type==="1"){
+                _this.reloadList();
+                $("#normalListWin"+_this.menuid).window("close");
+            }else{
+                $.messager.alert("提示框",res.errorMessage);
+            }
         })
     },
     cancel:function(){
         this.clear();
-        $("#normalListWin").window("close");
+        $("#normalListWin"+this.menuid).window("close");
     },
     clear:function(){
-        $("#normalListMenuid").val("");
-        $("#normalListId").val("");
-        $("#normalListTitle").val("");
-        $("#normalListContent").val("");
+        $("#normalListMenuid"+this.menuid).val("");
+        $("#normalListId"+this.menuid).val("");
+        $("#normalListTitle"+this.menuid).val("");
+        $("#normalListContent"+this.menuid).val("");
     }
-};
+}
 //function NormalList(){
 //    this.$outHtml=$('<div></div>');
 //    this.$table=$('<table></table>');

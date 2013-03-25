@@ -4,10 +4,12 @@
     <style type="text/css">
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/easyuithemes/icon.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/easyuithemes/gray/easyui.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/common.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/style.css" />
+    <link rel="stylesheet" href="<?php echo base_url();?>themes/kindeditor/themes/default/default.css" />
 </head>
 <body class="easyui-layout">
 <!--north start-->
@@ -117,9 +119,14 @@
 <script type="text/javascript" src="<?php echo base_url();?>scripts/manage/common.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>scripts/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>scripts/easyui-lang-zh_CN.js"></script>
+<script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/zh_CN.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url();?>scripts/manage/news/normalList.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" >
+
 $(function(){
     $('.sider li a').click(function(){
         var classId = 'index';
