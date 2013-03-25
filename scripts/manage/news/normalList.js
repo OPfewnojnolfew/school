@@ -1,5 +1,8 @@
 function NormalList(menuid){
     this.menuid=menuid;
+    this.editor=null,
+    this.init();
+
 }
 NormalList.prototype={
     createTable: function (){
@@ -22,12 +25,12 @@ NormalList.prototype={
                 width : 200,
                 sortable : true
             },
-            {
-                field : "createtime",
-                title : "创建时间",
-                width : 120,
-                sortable : true
-            }]],
+                {
+                    field : "createtime",
+                    title : "创建时间",
+                    width : 120,
+                    sortable : true
+                }]],
             onSortColumn : function() {
                 _this.reloadList();
             },
@@ -44,6 +47,45 @@ NormalList.prototype={
             menuid:this.menuid
         });
     },
+    createDialog:function(){
+        var _this=this;
+        $('#normalListWin'+this.menuid).dialog({
+            title:"",
+            width:650,
+            height:520,
+            modal : true,
+            resizable:true,
+            maximizable:true,
+            closed:true,
+            buttons : [ {
+                text : '确定',
+                handler : function() {
+                    var postData={
+                        menuid:$("#normalListMenuid"+_this.menuid).val(),
+                        id:$("#normalListId"+_this.menuid).val(),
+                        title:$("#normalListTitle"+_this.menuid).val(),
+                        //content:$("#normalListContent"+_this.menuid).val()
+                        content:_this.editor.html()
+                    }
+                    $.post(global._prefix+"/manage/news/addOrEditNormalList",postData,function(res){
+                        res=eval("("+res+")");
+                        if(res.type==="1"){
+                            _this.reloadList();
+                            $("#normalListWin"+_this.menuid).window("close");
+                        }else{
+                            $.messager.alert("提示框",res.errorMessage);
+                        }
+                    })
+                }},
+                {
+                    text : '取消',
+                    handler : function() {
+                        _this.clear();
+                        $("#normalListWin"+_this.menuid).window("close");
+                }
+            } ]
+        });
+    },
     mDel:function (){
         var _this=this;
         var rows = $("#list"+this.menuid).datagrid("getSelections");
@@ -56,9 +98,12 @@ NormalList.prototype={
         }
         $.messager.confirm("提示框", "确定删除吗", function(r) {
             if (r) {
-                $.post("/php/manage/news/deleteNews",{ids:deleteIds.toString()},function(res){
-                    if(res==="1"){
-                        _this.reloadList()
+                $.post(global._prefix+"/manage/news/deleteNews",{ids:deleteIds.toString()},function(res){
+                    res=eval("("+res+")");
+                    if(res.type==="1"){
+                        _this.reloadList();
+                    }else{
+                        $.messager.alert("提示框",res.errorMessage);
                     }
                 });
             }
@@ -67,7 +112,7 @@ NormalList.prototype={
     add:function add(){
         this.clear();
         $("#normalListMenuid"+this.menuid).val(this.menuid);
-        $("#normalListWin"+this.menuid).window("open");
+        $("#normalListWin"+this.menuid).dialog("open");
     },
     edit:function (){
         var selectedNode=$("#list"+this.menuid).datagrid("getSelected");
@@ -77,36 +122,29 @@ NormalList.prototype={
         }
         $("#normalListId"+this.menuid).val(selectedNode.id);
         $("#normalListTitle"+this.menuid).val(selectedNode.title);
-        $("#normalListContent"+this.menuid).val(selectedNode.content);
+        //$("#normalListContent"+this.menuid).val(selectedNode.content);
+        this.editor.html(selectedNode.content);
         $("#normalListWin"+this.menuid).window("open");
-    },
-    save:function(){
-        var _this=this;
-        var postData={
-            menuid:$("#normalListMenuid"+this.menuid).val(),
-            id:$("#normalListId"+this.menuid).val(),
-            title:$("#normalListTitle"+this.menuid).val(),
-            content:$("#normalListContent"+this.menuid).val()
-        }
-        $.post(global._prefix+"/manage/news/addOrEditNormalList",postData,function(res){
-            res=eval("("+res+")");
-            if(res.type==="1"){
-                _this.reloadList();
-                $("#normalListWin"+_this.menuid).window("close");
-            }else{
-                $.messager.alert("提示框",res.errorMessage);
-            }
-        })
-    },
-    cancel:function(){
-        this.clear();
-        $("#normalListWin"+this.menuid).window("close");
     },
     clear:function(){
         $("#normalListMenuid"+this.menuid).val("");
         $("#normalListId"+this.menuid).val("");
         $("#normalListTitle"+this.menuid).val("");
-        $("#normalListContent"+this.menuid).val("");
+       // $("#normalListContent"+this.menuid).val("");
+        this.editor.html("");
+    },
+    init:function(){
+        this.createTable();
+        this.createDialog();
+        this.editor=  KindEditor.create("#normalListContent"+this.menuid, {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : false,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+        });
     }
 }
 //function NormalList(){

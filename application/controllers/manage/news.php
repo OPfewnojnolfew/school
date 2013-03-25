@@ -55,9 +55,15 @@ class News extends MY_Controller {
 		try {
 			$ids = $this->input->post ( 'ids' );
 			$this->News_model->deleteNews ( $ids );
-			echo '1';
+            echo json_encode(array(
+                'errorMessage' => "",
+                'type'  => "1"
+            ));
 		} catch ( Exception $ex ) {
-			echo '0';
+            echo json_encode(array(
+                'errorMessage' => $ex,
+                'type'  => "0"
+            ));
 		}
 	}
 	public function addOrEditNormalList() {
