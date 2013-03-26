@@ -18,6 +18,9 @@ class News extends MY_Controller {
             case 2:
                 $this->load->view('manage/news/normalList',$data);
                 break;
+            case 3:
+                $this->load->view('manage/news/imageOrVideoList',$data);
+                break;
             case 4:
                 $this->load->view('manage/news/linkList',$data);
                 break;
@@ -33,13 +36,6 @@ class News extends MY_Controller {
 		$this->layout_manage->view ( "manage/news/add" );
 	}
 	public function initData() {
-//		$title = $this->;
-//		$begin = $this->input->post ( 'begin' );
-//		$end = $this->input->post ( 'end' );
-//		$page = $this->input->post ( 'page' );
-//		$rows = $this->input->post ( 'rows' );
-//		$order = $this->input->post ( 'order' );
-//		$sort = $this->input->post ( 'sort' );
 		$array = array(
             'menuid'        =>$this->input->post('menuid'),
             'title'        => $this->input->post ( 'title' ),
