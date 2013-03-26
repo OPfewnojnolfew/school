@@ -14,11 +14,12 @@ class News extends MY_Controller {
     {
         $params=$this->uri->uri_to_assoc(4);
         $data["menuid"]=$params["menuid"];
-        //$this->load->view('manage/news/normalList');
         switch($params["type"]){
             case 2:
-               // print_r($params);return;
                 $this->load->view('manage/news/normalList',$data);
+                break;
+            case 4:
+                $this->load->view('manage/news/linkList',$data);
                 break;
         }
 
@@ -76,7 +77,7 @@ class News extends MY_Controller {
 		if ($id == false) {
 			$this->News_model->addNormalList ( $title, $content,$menuid, $createid);
 		} else {
-			$this->News_model->editNormalList ( $id, $title, $content,$createid);
+			$this->News_model->editNormalList ( $id, $title, $content);
 		}
             echo json_encode(array(
                 'errorMessage' => "",
@@ -88,4 +89,26 @@ class News extends MY_Controller {
             'type'  => "0"
         ));}
 	}
+    public function addOrEditLinkList() {
+        try{
+            $id = $this->input->post ( 'id' );
+            $title = $this->input->post ( 'title' );
+            $linkUrl = $this->input->post ( 'linkurl' );
+            $menuid =$this->input->post ( 'menuid' );
+            $createid=$this->session->userdata('account_id');
+            if ($id == false) {
+                $this->News_model->addLinkList ( $title, $linkUrl,$menuid, $createid);
+            } else {
+                $this->News_model->editLinkList ( $id, $title, $linkUrl);
+            }
+            echo json_encode(array(
+                'errorMessage' => "",
+                'type'  => "1"
+            ));
+        }catch (Exception $e){
+            echo json_encode(array(
+                'errorMessage' => $e,
+                'type'  => "0"
+            ));}
+    }
 }

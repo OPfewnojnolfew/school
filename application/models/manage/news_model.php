@@ -24,18 +24,47 @@ class News_model extends CI_Model {
 		return "{\"total\":$total,\"rows\":" . json_encode ( $news ) . "}";
 	}
 	function getNews($id) {
-		$news = $this->db->query ( "SELECT * FROM news WHERE id='{$id}'" )->result ();
+		$news = $this->db->query ( "SELECT title,content,menuid,readcount,createtime FROM news WHERE id='{$id}'" )->result ();
 		return $news [0];
 	}
 	function deleteNews($ids) {
 		$this->db->query ( "DELETE FROM news WHERE id IN ($ids)" );
 	}
 	function addNormalList($title, $content,$menuid,$createid) {
-		$this->db->query ( "INSERT INTO news(title,content,menuid,createid) VALUES('" . $title . "','" . $content . "','" . $menuid . "','" . $createid . "')" );
+        $data = array(
+            'title' => $title,
+            'content' => $content ,
+            'menuid' => $menuid,
+            'createid'=>$createid
+        );
+        $this->db->insert('news', $data);
 	}
-	function editNormalList($id, $title, $content, $createid) {
-		$this->db->query ( "UPDATE news SET title='" . $title . "',content='" . $content . "',createid='" . $createid . "' WHERE id='" . $id . "'" );
+	function editNormalList($id, $title, $content) {
+        $data = array(
+            'title' => $title,
+            'content' => $content
+        );
+        $this->db->where('id', $id);
+        $this->db->update('news', $data);
 	}
+
+    function addLinkList($title, $linkUrl,$menuid,$createid) {
+        $data = array(
+            'title' => $title,
+            'linkurl' => $linkUrl ,
+            'menuid' => $menuid,
+            'createid'=>$createid
+        );
+        $this->db->insert('news', $data);
+    }
+    function editLinkList($id, $title, $linkUrl) {
+        $data = array(
+            'title' => $title,
+            'linkurl' => $linkUrl
+        );
+        $this->db->where('id', $id);
+        $this->db->update('news', $data);
+    }
 }
 
 ?>

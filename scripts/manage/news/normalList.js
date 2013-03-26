@@ -25,17 +25,26 @@ NormalList.prototype={
                 width : 200,
                 sortable : true
             },
-                {
-                    field : "createtime",
-                    title : "创建时间",
-                    width : 120,
-                    sortable : true
-                }]],
+            {
+                field : 'readcount',
+                title : '阅读次数',
+                width : 100,
+                sortable : true
+            },
+            {
+                field : "createtime",
+                title : "创建时间",
+                width : 120,
+                sortable : true
+            }]],
             onSortColumn : function() {
                 _this.reloadList();
             },
+            onLoadSuccess:function(){
+                $("#list"+_this.menuid).datagrid("clearSelections");
+            },
             onClickRow:function(rowIndex){
-                $("#list"+this.menuid).datagrid("unselectRow",rowIndex);
+                $("#list"+_this.menuid).datagrid("unselectRow",rowIndex);
             }
         });
     },

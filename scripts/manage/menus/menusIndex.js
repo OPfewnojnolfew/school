@@ -25,6 +25,8 @@ $(function(){
                     				return "简介";
                     			case "2":
                     				return "一般列表";
+                                case "4":
+                                    return "链接列表";
                     			case "3":
                     				return "图片或视频列表";
                     			case "5":
