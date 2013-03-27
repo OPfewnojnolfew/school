@@ -6,10 +6,10 @@ class Uploadify extends CI_Controller
         $this->load->model ( 'manage/Uploadify_model' );
     }
     public function upload(){
-        $targetFolder ='/upload';
+        $targetFolder ='upload';
         $time=time();
         $tempFile = $_FILES['Filedata']['tmp_name'];
-        $targetPath =  dirname(BASEPATH) . $targetFolder;
+        $targetPath =  dirname(BASEPATH) .'/'. $targetFolder;
 
         if(!is_dir($targetPath))
         {
@@ -24,7 +24,7 @@ class Uploadify extends CI_Controller
 
         if (in_array($fileParts['extension'],$fileTypes)) {
             move_uploaded_file($tempFile,$targetFile);
-            echo  $this->Uploadify_model->add($fileName,$targetFile);
+            echo  $this->Uploadify_model->add($fileName,$targetFolder.'/'.$fileName);
         } else {
             echo json_encode(Array(
                 "type"=>"0",
