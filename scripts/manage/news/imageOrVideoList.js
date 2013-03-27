@@ -1,6 +1,9 @@
 function ImageOrVideoList(menuid){
     this.menuid=menuid;
     this.editor=null,
+    this.attachmentPath="",
+    this.attachmentID="",
+    this.attachmentName="",
         this.init();
 
 }
@@ -73,6 +76,7 @@ ImageOrVideoList.prototype={
                         menuid:$("#imageOrVideoListMenuid"+_this.menuid).val(),
                         id:$("#imageOrVideoListId"+_this.menuid).val(),
                         title:$("#imageOrVideoListTitle"+_this.menuid).val(),
+                        attachmentPath=_this.attachmentPath,
                         content:_this.editor.html()
                     }
                     $.post(global._prefix+"/manage/news/addOrEditImageOrVideoList",postData,function(res){
@@ -157,6 +161,7 @@ ImageOrVideoList.prototype={
             'onUploadSuccess': function (fileObj, data, response) {
                 //console.log(data);
                 var msg = eval("(" + data + ")");
+                _this.attachmentPath=msg.attachmentPath;
                 $("#imageOrVideoPath"+_this.menuid).html("<span>"+msg.attachmentName+"</span>")
             },
             'auto': true,
