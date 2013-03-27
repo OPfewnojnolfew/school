@@ -4,7 +4,7 @@ function ImageOrVideoList(menuid){
     this.attachmentPath="",
     this.attachmentID="",
     this.attachmentName="",
-        this.init();
+    this.init();
 
 }
 ImageOrVideoList.prototype={
@@ -76,7 +76,7 @@ ImageOrVideoList.prototype={
                         menuid:$("#imageOrVideoListMenuid"+_this.menuid).val(),
                         id:$("#imageOrVideoListId"+_this.menuid).val(),
                         title:$("#imageOrVideoListTitle"+_this.menuid).val(),
-                        attachmentPath=_this.attachmentPath,
+                        attachmentID:_this.attachmentID,
                         content:_this.editor.html()
                     }
                     $.post(global._prefix+"/manage/news/addOrEditImageOrVideoList",postData,function(res){
@@ -123,19 +123,38 @@ ImageOrVideoList.prototype={
     },
     add:function add(){
         this.clear();
+        this.attachmentPath="";
+        this.attachmentID="";
+        this.attachmentName="";
+        $("#imageOrVideoPath"+this.menuid).html("");
         $("#imageOrVideoListMenuid"+this.menuid).val(this.menuid);
         $("#imageOrVideoListWin"+this.menuid).dialog("open");
     },
     edit:function (){
+        var _this=this;
         var selectedNode=$("#list"+this.menuid).datagrid("getSelected");
         if(selectedNode===null){
             $.messager.alert("提示框","请选择要编辑的项");
             return;
         }
-        $("#imageOrVideoListId"+this.menuid).val(selectedNode.id);
-        $("#imageOrVideoListTitle"+this.menuid).val(selectedNode.title);
-        this.editor.html(selectedNode.content);
-        $("#imageOrVideoListWin"+this.menuid).window("open");
+        this.attachmentPath="";
+        this.attachmentID="";
+        this.attachmentName="";
+        $("#imageOrVideoPath"+_this.menuid).html("");
+        $.post(global._prefix+"/manage/uploadify/getAttachment",{newsid:selectedNode.id},function(res){
+            res=eval("("+res+")");
+            if(res.type==="1"){
+                _this.attachmentPath=res.attachmentPath;
+                _this.attachmentID=res.attachmentID;
+                _this.attachmentName=res.attachmentName;
+                $("#imageOrVideoPath"+_this.menuid).html("<span>"+res.attachmentName+"</span>");
+            }
+            $("#imageOrVideoListId"+_this.menuid).val(selectedNode.id);
+            $("#imageOrVideoListTitle"+_this.menuid).val(selectedNode.title);
+            _this.editor.html(selectedNode.content);
+            $("#imageOrVideoListWin"+_this.menuid).window("open");
+        });
+
     },
     clear:function(){
         $("#imageOrVideoListMenuid"+this.menuid).val("");
@@ -159,22 +178,27 @@ ImageOrVideoList.prototype={
             'multi': false,
             'buttonText': '浏览文件',
             'onUploadSuccess': function (fileObj, data, response) {
-                //console.log(data);
                 var msg = eval("(" + data + ")");
-                _this.attachmentPath=msg.attachmentPath;
-                $("#imageOrVideoPath"+_this.menuid).html("<span>"+msg.attachmentName+"</span>")
+                if(msg.type==="1"){
+                    _this.attachmentID=msg.attachmentID;
+                    _this.attachmentName=msg.attachmentName;
+                    _this.attachmentPath=msg.attachmentPath;
+                    $("#imageOrVideoPath"+_this.menuid).html("<span>"+msg.attachmentName+"</span>");
+                }else{
+                     $.messager.alert("提示框",msg.errMessage);
+                }
             },
             'auto': true,
             'onSelect': function (fileObj) {
                 var maxSize = 1024 * 1024 * 2000;
                 if (fileObj.size > maxSize) {
                     $.messager.alert("提示框", "上传文件不能超过2G");
-                    $('#file_upload'+this.menuid).uploadifyCancel(queueId);
+                    $('#file_upload'+_this.menuid).uploadify('cancel');
                     return false;
                 }
                 if (fileObj.type.toUpperCase() === ".EXE") {
                     $.messager.alert("提示框", "为了安全，不能上传exe文件");
-                    $('#file_upload'+this.menuid).uploadifyCancel(queueId);
+                    $('#file_upload'+_this.menuid).uploadify('cancel');
                     return false;
                 }
             }

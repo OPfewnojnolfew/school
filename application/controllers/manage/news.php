@@ -107,4 +107,27 @@ class News extends MY_Controller {
                 'type'  => "0"
             ));}
     }
+    public function addOrEditImageOrVideoList() {
+        try{
+            $id = $this->input->post ( 'id' );
+            $title = $this->input->post ( 'title' );
+            $content = $this->input->post ( 'content' );
+            $menuid =$this->input->post ( 'menuid' );
+            $attachmentID=$this->input->post('attachmentID');
+            if ($id == false) {
+                $this->News_model->addImageOrVideoList ( $title, $content,$menuid, $attachmentID);
+            } else {
+                $this->News_model->editImageOrVideoList ( $id, $title, $content,$attachmentID);
+            }
+            echo json_encode(array(
+                'errorMessage' => "",
+                'type'  => "1"
+            ));
+        }catch (Exception $e){
+            echo json_encode(array(
+                'errorMessage' => $e,
+                'type'  => "0"
+            ));
+        }
+    }
 }

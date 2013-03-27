@@ -65,6 +65,34 @@ class News_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update('news', $data);
     }
+    function addImageOrVideoList ( $title, $content,$menuid, $attachmentID) {
+        $data = array(
+            'title' => $title,
+            'content' => $content ,
+            'menuid' => $menuid
+        );
+        $this->db->insert('news', $data);
+        $newsid=$this->db->insert_id();
+
+        $attrdata = array(
+            'newsid' => $newsid
+        );
+        $this->db->where('attachmentID', $attachmentID);
+        $this->db->update('attachment', $attrdata);
+    }
+    function editImageOrVideoList( $id, $title, $content,$attachmentID) {
+        $data = array(
+            'title' => $title,
+            'content' => $content
+        );
+        $this->db->where('id', $id);
+        $this->db->update('news', $data);
+        $attrdata = array(
+            'newsid' => $id
+        );
+        $this->db->where('attachmentID', $attachmentID);
+        $this->db->update('attachment', $attrdata);
+    }
 }
 
 ?>
