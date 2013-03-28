@@ -85,13 +85,18 @@ class News_model extends CI_Model {
             'title' => $title,
             'content' => $content
         );
-        $this->db->where('id', $id);
-        $this->db->update('news', $data);
-        $attrdata = array(
-            'newsid' => $id
-        );
-        $this->db->where('attachmentID', $attachmentID);
-        $this->db->update('attachment', $attrdata);
+        if(!empty($attachmentID)){
+            $this->db->where('id', $id);
+            $this->db->update('news', $data);
+            $this->db->query("DELETE FROM attachment WHERE newsid=".$id." AND attachmentID !=".$attachmentID."");
+
+
+            $attrdata = array(
+                'newsid' => $id
+            );
+            $this->db->where('attachmentID', $attachmentID);
+            $this->db->update('attachment', $attrdata);
+        }
     }
 }
 

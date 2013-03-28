@@ -27,7 +27,8 @@ class Uploadify_model extends CI_Model {
     function delete($id) {
         $query= $this->db->query ( "SELECT attachmentPath FROM attachment WHERE  attachmentID="+$id );
         if($query->num_rows==1){
-            $attachmentPath=$query->result_array()[0]["attachmentPath"];
+            $row=$query->first_row();
+            $attachmentPath=$row["attachmentPath"];
             $attachmentPath=dirname(BASEPATH) .'/'. $attachmentPath;
             if(file_exists($attachmentPath)){
                 unlink($attachmentPath);
@@ -49,7 +50,7 @@ class Uploadify_model extends CI_Model {
             $query = $this->db->query ( "SELECT attachmentID,attachmentPath,attachmentName FROM attachment where newsid='".$newsid."'" );
             try{
                  $rows= $query->result_array();
-                if(count($rows)==1){
+                if(count($rows)>0){
                     $row=$rows[0];
                 return json_encode(array(
                     "type"=>"1",
@@ -61,7 +62,7 @@ class Uploadify_model extends CI_Model {
             }catch (Exception $e){
                 return json_encode(array(
                     "type"=>"0",
-                    "errMessage"=>"无附件"
+                    "errMessage"=>"获取附件出错"
                 ));
             }
         }

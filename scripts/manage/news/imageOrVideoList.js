@@ -128,6 +128,7 @@ ImageOrVideoList.prototype={
         $("#imageOrVideoListWin"+this.menuid).dialog("open");
     },
     edit:function (){
+        this.clear();
         var _this=this;
         var selectedNode=$("#list"+this.menuid).datagrid("getSelected");
         if(selectedNode===null){

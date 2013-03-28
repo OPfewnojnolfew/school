@@ -14,7 +14,7 @@ class Uploadify extends CI_Controller
         {
             mkdir($targetPath);
          }
-        $originfileName=$_FILES["Filedata"]["name"]
+        $originfileName=$_FILES["Filedata"]["name"];
         $fileName=$time . '_' . $originfileName;
         $targetFile = rtrim($targetPath,'/') . '/'.$fileName ;
 
