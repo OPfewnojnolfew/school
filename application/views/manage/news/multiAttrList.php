@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <th>
-                        图片或视频：
+                        文件：
                     </th>
                     <td>
                         <input id="file_upload<?php echo $menuid?>" name="file_upload" type="file">
