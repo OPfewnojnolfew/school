@@ -10,21 +10,21 @@ class Uploadify extends CI_Controller
         $time=time();
         $tempFile = $_FILES['Filedata']['tmp_name'];
         $targetPath =  dirname(BASEPATH) .'/'. $targetFolder;
-
         if(!is_dir($targetPath))
         {
             mkdir($targetPath);
          }
-        $fileName=$time . '_' . $_FILES["Filedata"]["name"];
+        $originfileName=$_FILES["Filedata"]["name"]
+        $fileName=$time . '_' . $originfileName;
         $targetFile = rtrim($targetPath,'/') . '/'.$fileName ;
 
         // Validate the file type
         $fileTypes = array('jpg','jpeg','gif','png','swf'); // File extensions
-        $fileParts = pathinfo($_FILES['Filedata']['name']);
+        $fileParts = pathinfo($originfileName);
 
         if (in_array($fileParts['extension'],$fileTypes)) {
             move_uploaded_file($tempFile,$targetFile);
-            echo  $this->Uploadify_model->add($fileName,$targetFolder.'/'.$fileName);
+            echo  $this->Uploadify_model->add($originfileName,$targetFolder.'/'.$fileName);
         } else {
             echo json_encode(Array(
                 "type"=>"0",
