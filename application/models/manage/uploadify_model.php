@@ -24,8 +24,24 @@ class Uploadify_model extends CI_Model {
             "attachmentPath"=>$attachmentPath
         ));
     }
-    function delete($ids) {
-        $this->db->query ( "DELETE FROM attachment WHERE attachmentID IN ($ids)" );
+    function delete($id) {
+        $query= $this->db->query ( "SELECT attachmentPath FROM attachment WHERE  attachmentID="+$id );
+        if($query->num_rows==1){
+            $attachmentPath=$query->result_array()[0]["attachmentPath"];
+            $attachmentPath=dirname(BASEPATH) .'/'. $attachmentPath;
+            if(file_exists($attachmentPath)){
+                unlink($attachmentPath);
+            }
+            $this->db->query ( "DELETE FROM attachment WHERE attachmentID="+$id );
+            return json_encode(array(
+                "type"=>"1",
+                "errMessage"=>""
+            ));
+        }
+        return json_encode(array(
+            "type"=>"0",
+            "errMessage"=>"删除失败"
+        ));
     }
     function getAttachment($newsid)
     {

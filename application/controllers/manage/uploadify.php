@@ -37,4 +37,8 @@ class Uploadify extends CI_Controller
         $newsid = $this->input->post ( 'newsid' );
         echo $this->Uploadify_model->getAttachment($newsid);
     }
+    public function  delete(){
+        $id=$this->input->post("id");
+        echo $this->Uploadify_model->delete($id);
+    }
 }
