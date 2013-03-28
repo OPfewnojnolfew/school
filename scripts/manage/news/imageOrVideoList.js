@@ -123,9 +123,6 @@ ImageOrVideoList.prototype={
     },
     add:function add(){
         this.clear();
-        this.attachmentPath="";
-        this.attachmentID="";
-        this.attachmentName="";
         $("#imageOrVideoPath"+this.menuid).html("");
         $("#imageOrVideoListMenuid"+this.menuid).val(this.menuid);
         $("#imageOrVideoListWin"+this.menuid).dialog("open");
@@ -137,9 +134,6 @@ ImageOrVideoList.prototype={
             $.messager.alert("提示框","请选择要编辑的项");
             return;
         }
-        this.attachmentPath="";
-        this.attachmentID="";
-        this.attachmentName="";
         $("#imageOrVideoPath"+_this.menuid).html("");
         $.post(global._prefix+"/manage/uploadify/getAttachment",{newsid:selectedNode.id},function(res){
             res=eval("("+res+")");
@@ -161,6 +155,9 @@ ImageOrVideoList.prototype={
         $("#imageOrVideoListId"+this.menuid).val("");
         $("#imageOrVideoListTitle"+this.menuid).val("");
         this.editor.html("");
+        this.attachmentPath="";
+        this.attachmentID="";
+        this.attachmentName="";
     },
     upload:function(){
         var _this=this;
