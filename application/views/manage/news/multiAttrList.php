@@ -1,16 +1,16 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>scripts/uploadify/uploadify.css">
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/normalList.js"></script>
+        src="<?php echo base_url();?>scripts/manage/news/multiAttrList.js"></script>
+<script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     $(function() {
-        var normalList=new NormalList("<?php echo $menuid?>");
+        var multiAttrList=new MultiAttrList("<?php echo $menuid?>");
 
-        $("#search<?php echo $menuid?>").click(function(){normalList.reloadList()});
-        $("#mDel<?php echo $menuid?>").click(function(){normalList.mDel()});
-        $("#add<?php echo $menuid?>").click(function(){normalList.add()});
-        $("#edit<?php echo $menuid?>").click(function(){normalList.edit()});
-        <!--        $("#normalListSave--><?php //echo $menuid?><!--").click(function(){normalList.save()});-->
-        <!--        $("#normalListCancel--><?php //echo $menuid?><!--").click(function(){normalList.cancel()});-->
-
+        $("#search<?php echo $menuid?>").click(function(){multiAttrList.reloadList()});
+        $("#mDel<?php echo $menuid?>").click(function(){multiAttrList.mDel()});
+        $("#add<?php echo $menuid?>").click(function(){multiAttrList.add()});
+        $("#edit<?php echo $menuid?>").click(function(){multiAttrList.edit()});
     });
 
 </script>
@@ -25,10 +25,10 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" id="search<?php echo $menuid?>">查询</a>
 </div>
 <table id="list<?php echo $menuid?>" toolbar="#searchbar<?php echo $menuid?>"></table>
-<div id="normalListWin<?php echo $menuid?>" class="easyui-dialog">
+<div id="multiAttrListWin<?php echo $menuid?>" class="easyui-dialog">
 
-        <input type="hidden" id="normalListMenuid<?php echo $menuid?>">
-        <input type="hidden" id="normalListId<?php echo $menuid?>">
+        <input type="hidden" id="multiAttrListMenuid<?php echo $menuid?>">
+        <input type="hidden" id="multiAttrListId<?php echo $menuid?>">
         <div class="division">
             <table width="100%" cellspacing="0" cellpadding="0" border="0" class="shopping_setting">
                 <tbody>
@@ -37,7 +37,16 @@
                         标题：
                     </th>
                     <td>
-                        <input type="text" id="normalListTitle<?php echo $menuid?>" class="easyui-validatebox easyui_form_input" style="width:240px;" data-options="required:true">
+                        <input type="text" id="multiAttrListTitle<?php echo $menuid?>" class="easyui-validatebox easyui_form_input" style="width:240px;" data-options="required:true">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        图片或视频：
+                    </th>
+                    <td>
+                        <input id="file_upload<?php echo $menuid?>" name="file_upload" type="file">
+                        <div id="imageOrVideoPath<?php echo $menuid?>"></div>
                     </td>
                 </tr>
                 </tbody>
@@ -51,7 +60,7 @@
                         内容
                     </th>
                     <td>
-                        <textarea id="normalListContent<?php echo $menuid?>" style="width: 100%; height:350px;">
+                        <textarea id="multiAttrListContent<?php echo $menuid?>" style="width: 100%; height:350px;">
                         </textarea>
                     </td>
                 </tr>

@@ -1,13 +1,11 @@
-function ImageOrVideoList(menuid){
+function MultiAttrList(menuid){
     this.menuid=menuid;
     this.editor=null,
-    this.attachmentPath="",
-    this.attachmentID="",
-    this.attachmentName="",
+    this.attachment=[],
     this.init();
 
 }
-ImageOrVideoList.prototype={
+MultiAttrList.prototype={
     createTable: function (){
         var _this=this;
         $("#list"+this.menuid).datagrid({
@@ -61,7 +59,7 @@ ImageOrVideoList.prototype={
     },
     createDialog:function(){
         var _this=this;
-        $('#imageOrVideoListWin'+this.menuid).dialog({
+        $('#multiAttrListWin'+this.menuid).dialog({
             title:"",
             width:650,
             height:520,
@@ -72,18 +70,23 @@ ImageOrVideoList.prototype={
             buttons : [ {
                 text : '确定',
                 handler : function() {
+
+                    var  attachmentIDs=[];
+                    for(var i=0;i<_this.attachment.length;i++){
+                        attachmentIDs.push(_this.attachment[i].attachmentID);
+                    }
                     var postData={
-                        menuid:$("#imageOrVideoListMenuid"+_this.menuid).val(),
-                        id:$("#imageOrVideoListId"+_this.menuid).val(),
-                        title:$("#imageOrVideoListTitle"+_this.menuid).val(),
-                        attachmentID:_this.attachmentID,
+                        menuid:$("#multiAttrListMenuid"+_this.menuid).val(),
+                        id:$("#multiAttrListId"+_this.menuid).val(),
+                        title:$("#multiAttrListTitle"+_this.menuid).val(),
+                        attachmentIDs:attachmentIDs.toString(),
                         content:_this.editor.html()
                     }
-                    $.post(global._prefix+"/manage/news/addOrEditImageOrVideoList",postData,function(res){
+                    $.post(global._prefix+"/manage/news/addOrEditMultiAttrList",postData,function(res){
                         res=eval("("+res+")");
                         if(res.type==="1"){
                             _this.reloadList();
-                            $("#imageOrVideoListWin"+_this.menuid).window("close");
+                            $("#multiAttrListWin"+_this.menuid).window("close");
                         }else{
                             $.messager.alert("提示框",res.errorMessage);
                         }
@@ -93,7 +96,7 @@ ImageOrVideoList.prototype={
                     text : '取消',
                     handler : function() {
                         _this.clear();
-                        $("#imageOrVideoListWin"+_this.menuid).window("close");
+                        $("#multiAttrListWin"+_this.menuid).window("close");
                     }
                 } ]
         });
@@ -124,8 +127,8 @@ ImageOrVideoList.prototype={
     add:function add(){
         this.clear();
         $("#imageOrVideoPath"+this.menuid).html("");
-        $("#imageOrVideoListMenuid"+this.menuid).val(this.menuid);
-        $("#imageOrVideoListWin"+this.menuid).dialog("open");
+        $("#multiAttrListMenuid"+this.menuid).val(this.menuid);
+        $("#multiAttrListWin"+this.menuid).dialog("open");
     },
     edit:function (){
         this.clear();
@@ -136,35 +139,32 @@ ImageOrVideoList.prototype={
             return;
         }
         $("#imageOrVideoPath"+_this.menuid).html("");
-        $.post(global._prefix+"/manage/uploadify/getAttachment",{newsid:selectedNode.id},function(res){
+        $.post(global._prefix+"/manage/uploadify/getMultiAttachment",{newsid:selectedNode.id},function(res){
             res=eval("("+res+")");
             if(res.type==="1"){
-                _this.attachmentPath=res.attachmentPath;
-                _this.attachmentID=res.attachmentID;
-                _this.attachmentName=res.attachmentName;
-                $("#imageOrVideoPath"+_this.menuid).html("<span>"+res.attachmentName+"</span>");
+                for(var i=0;i<res.attachment.length;i++){
+                    _this.additionAttachment(res.attachment[i]);
+                }
             }
-            $("#imageOrVideoListId"+_this.menuid).val(selectedNode.id);
-            $("#imageOrVideoListTitle"+_this.menuid).val(selectedNode.title);
+            $("#multiAttrListId"+_this.menuid).val(selectedNode.id);
+            $("#multiAttrListTitle"+_this.menuid).val(selectedNode.title);
             _this.editor.html(selectedNode.content);
-            $("#imageOrVideoListWin"+_this.menuid).window("open");
+            $("#multiAttrListWin"+_this.menuid).window("open");
         });
 
     },
     clear:function(){
-        $("#imageOrVideoListMenuid"+this.menuid).val("");
-        $("#imageOrVideoListId"+this.menuid).val("");
-        $("#imageOrVideoListTitle"+this.menuid).val("");
+        $("#multiAttrListMenuid"+this.menuid).val("");
+        $("#multiAttrListId"+this.menuid).val("");
+        $("#multiAttrListTitle"+this.menuid).val("");
         this.editor.html("");
-        this.attachmentPath="";
-        this.attachmentID="";
-        this.attachmentName="";
+        this.attachment=[];
     },
     upload:function(){
         var _this=this;
         $('#file_upload'+this.menuid).uploadify({
             'swf':global._prefix+ '/scripts/uploadify/uploadify.swf?val=' + Math.random(),
-            'uploader':global._prefix+'/manage/Uploadify/upload',
+            'uploader':global._prefix+'/manage/Uploadify/multiUpload',
             'folder': global._prefix+'/files/imageorvideo/',
             'cancelImg':global._prefix+ '/scripts/uploadify/uploadify-cancel.png',
             'fileTypeExts': '*',
@@ -172,15 +172,13 @@ ImageOrVideoList.prototype={
             'removeTimeout' : 0.1,
             'buttonClass': 'browser',
             'fileSizeLimit': 1024 * 1024 * 2000, //2G
-            'multi': false,
+            'multi': true,
             'buttonText': '浏览文件',
             'onUploadSuccess': function (fileObj, data, response) {
                 var msg = eval("(" + data + ")");
+                _this.additionAttachment({attachmentID:msg.attachmentID,attachmentName:msg.attachmentName,attachmentPath:msg.attachmentPath});
                 if(msg.type==="1"){
-                    _this.attachmentID=msg.attachmentID;
-                    _this.attachmentName=msg.attachmentName;
-                    _this.attachmentPath=msg.attachmentPath;
-                    $("#imageOrVideoPath"+_this.menuid).html("<span>"+msg.attachmentName+"</span>");
+                    _this.attachment.push({attachmentID:msg.attachmentID,attachmentPath:msg.attachmentPath,attachmentName:msg.attachmentName});
                 }else{
                      $.messager.alert("提示框",msg.errMessage);
                 }
@@ -204,7 +202,7 @@ ImageOrVideoList.prototype={
     init:function(){
         this.createTable();
         this.createDialog();
-        this.editor=  KindEditor.create("#imageOrVideoListContent"+this.menuid, {
+        this.editor=  KindEditor.create("#multiAttrListContent"+this.menuid, {
             resizeType : 1,
             allowPreviewEmoticons : false,
             allowImageUpload : false,
@@ -214,5 +212,34 @@ ImageOrVideoList.prototype={
                 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
         });
         this.upload();
+    },
+    additionAttachment:function(attr){
+        var _this=this;
+        _this.attachment.push({attachmentID:attr.attachmentID,attachmentPath:attr.attachmentPath,attachmentName:attr.attachmentName})
+        var dv=$("<div></div>");
+        var spanName=$("<span>"+attr.attachmentName+"</span>");
+        var aDel=$('<a href="javascript:void(0)" delattr="'+attr.attachmentID+'">删除</a>');
+        aDel.click(function(){
+            var that=this;
+            $.post(global._prefix+"/manage/uploadify/delete",{attachmentID:$(this).attr("delattr"),callback:Math.random()},function(res){
+                res= eval("("+res+")");
+                if(res.type==="1"){
+                    $(that).parent().remove();
+                    for(var j=0;j<_this.attachment.length;j++){
+                        if(_this.attachment[j].attachmentID==$(that).attr("delattr")){
+                            delete _this.attachment[j];
+                        }
+                    }
+                }
+                else
+                {
+                    $.messager.alert("提示框",res.errMessage);
+                }
+            })
+        })
+        dv.append(spanName);
+        dv.append(aDel)
+        $("#imageOrVideoPath"+_this.menuid).append(dv);
     }
+
 }

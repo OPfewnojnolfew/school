@@ -122,8 +122,6 @@
 <script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/kindeditor-min.js"></script>
 <script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/zh_CN.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/normalList.js"></script>
-<script type="text/javascript"
         src="<?php echo base_url();?>scripts/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" >
 

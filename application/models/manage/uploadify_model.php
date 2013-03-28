@@ -24,20 +24,25 @@ class Uploadify_model extends CI_Model {
             "attachmentPath"=>$attachmentPath
         ));
     }
-    function delete($id) {
-        $query= $this->db->query ( "SELECT attachmentPath FROM attachment WHERE  attachmentID="+$id );
-        if($query->num_rows==1){
-            $row=$query->first_row();
-            $attachmentPath=$row["attachmentPath"];
-            $attachmentPath=dirname(BASEPATH) .'/'. $attachmentPath;
-            if(file_exists($attachmentPath)){
-                unlink($attachmentPath);
+    function delete($attachmentID) {
+        if(!empty($attachmentID)){
+            $query= $this->db->query ( "SELECT attachmentPath FROM attachment WHERE  attachmentID=".$attachmentID );
+
+            if($query->num_rows()==1){
+
+                $row=$query->first_row();
+                $attachmentPath=$row->attachmentPath;
+
+                $attachmentPath=dirname(BASEPATH) .'/'. $attachmentPath;
+                if(file_exists($attachmentPath)){
+                    unlink($attachmentPath);
+                }
+                $this->db->query ( "DELETE FROM attachment WHERE attachmentID=".$attachmentID );
+                return json_encode(array(
+                    "type"=>"1",
+                    "errMessage"=>""
+                ));
             }
-            $this->db->query ( "DELETE FROM attachment WHERE attachmentID="+$id );
-            return json_encode(array(
-                "type"=>"1",
-                "errMessage"=>""
-            ));
         }
         return json_encode(array(
             "type"=>"0",
@@ -71,5 +76,26 @@ class Uploadify_model extends CI_Model {
             "errMessage"=>"无附件"
         ));
     }
+function getMultiAttachment($newsid){
+    if(!empty($newsid)){
+        try{
+            $query = $this->db->query ( "SELECT attachmentID,attachmentPath,attachmentName FROM attachment where newsid='".$newsid."'" );
+
+                return json_encode(array(
+                    "type"=>"1",
+                    "attachment"=>$query->result_array()
+                ));
+        }catch (Exception $e){
+            return json_encode(array(
+                "type"=>"0",
+                "errMessage"=>"获取附件出错"
+            ));
+        }
+    }
+    return json_encode(array(
+        "type"=>"0",
+        "attachment"=>"获取附件出错"
+    ));
+}
 
 }

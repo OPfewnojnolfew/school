@@ -24,6 +24,8 @@ class News extends MY_Controller {
             case 4:
                 $this->load->view('manage/news/linkList',$data);
                 break;
+            case 5:
+                $this->load->view('manage/news/multiAttrList',$data);
         }
 
     }
@@ -118,6 +120,29 @@ class News extends MY_Controller {
                 $this->News_model->addImageOrVideoList ( $title, $content,$menuid, $attachmentID);
             } else {
                 $this->News_model->editImageOrVideoList ( $id, $title, $content,$attachmentID);
+            }
+            echo json_encode(array(
+                'errorMessage' => "",
+                'type'  => "1"
+            ));
+        }catch (Exception $e){
+            echo json_encode(array(
+                'errorMessage' => $e,
+                'type'  => "0"
+            ));
+        }
+    }
+    public function addOrEditMultiAttrList() {
+        try{
+            $id = $this->input->post ( 'id' );
+            $title = $this->input->post ( 'title' );
+            $content = $this->input->post ( 'content' );
+            $menuid =$this->input->post ( 'menuid' );
+            $attachmentIDs=$this->input->post('attachmentIDs');
+            if ($id == false) {
+                $this->News_model->addMultiAttrList ( $title, $content,$menuid, $attachmentIDs);
+            } else {
+                $this->News_model->editMultiAttrList ( $id, $title, $content,$attachmentIDs);
             }
             echo json_encode(array(
                 'errorMessage' => "",

@@ -98,6 +98,32 @@ class News_model extends CI_Model {
             $this->db->update('attachment', $attrdata);
         }
     }
+
+    function addMultiAttrList ( $title, $content,$menuid, $attachmentIDs) {
+        $data = array(
+            'title' => $title,
+            'content' => $content ,
+            'menuid' => $menuid
+        );
+        $this->db->insert('news', $data);
+        $newsid=$this->db->insert_id();
+        if(!empty($attachmentIDs)){
+        $this->db->query("UPDATE attachment SET newsid=".$newsid." WHERE  attachmentID IN(".$attachmentIDs.")");
+    }
+    }
+    function editMultiAttrList( $id, $title, $content,$attachmentIDs) {
+        $data = array(
+            'title' => $title,
+            'content' => $content
+        );
+        if(!empty($attachmentIDs)){
+            $this->db->where('id', $id);
+            $this->db->update('news', $data);
+            $this->db->query("DELETE FROM attachment WHERE newsid=".$id." AND attachmentID NOT IN(".$attachmentIDs.")");
+
+            $this->db->query("UPDATE attachment SET newsid=".$id." WHERE attachmentID IN(".$attachmentIDs.")");
+        }
+    }
 }
 
 ?>
