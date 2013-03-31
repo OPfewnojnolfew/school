@@ -125,6 +125,8 @@
 <script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
 <script type="text/javascript"
         src="<?php echo base_url();?>scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/single.js"></script>
 <script type="text/javascript" >
 
 $(function(){

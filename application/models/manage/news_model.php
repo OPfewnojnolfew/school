@@ -47,12 +47,23 @@ class News_model extends CI_Model
             'rows' => $query->result_array(),
         ));
     }
-
-    function getNews($id)
+    public function  initSingle($menuid)
     {
-        $news = $this->db->query("SELECT title,content,menuid,readcount,createtime FROM news WHERE id='{$id}'")->result();
-        return $news [0];
+        if (!empty($menuid)) {
+            $news = $this->db->query("SELECT id, title,content,menuid FROM news WHERE menuid='{$menuid}'");
+            if( $news->num_rows==1){
+                $new=$news->first_row();
+                return json_encode($new);
+            }
+        }
+        return "";
     }
+
+//    function getNews($id)
+//    {
+//        $news = $this->db->query("SELECT title,content,menuid,readcount,createtime FROM news WHERE id='{$id}'")->result();
+//        return $news [0];
+//    }
 
     function deleteNews($ids)
     {
@@ -202,6 +213,26 @@ class News_model extends CI_Model
             $this->db->where('attachmentID', $attachmentID);
             $this->db->update('attachment', $attrdata);
         }
+    }
+    function addSingle($title, $content, $menuid)
+    {
+        $data = array(
+            'title' => $title,
+            'content' => $content,
+            'menuid' => $menuid
+        );
+        $this->db->insert('news', $data);
+        return $this->db->insert_id();
+    }
+
+    function editSingle($id, $title, $content)
+    {
+        $data = array(
+            'title' => $title,
+            'content' => $content
+        );
+        $this->db->where('id', $id);
+        $this->db->update('news', $data);
     }
 }
 

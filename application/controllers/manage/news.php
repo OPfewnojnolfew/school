@@ -19,6 +19,9 @@ class News extends MY_Controller
         $params = $this->uri->uri_to_assoc(4);
         $data["menuid"] = $params["menuid"];
         switch ($params["type"]) {
+            case 1:
+                $this->load->view('manage/news/single', $data);
+                break;
             case 2:
                 $this->load->view('manage/news/normalList', $data);
                 break;
@@ -75,6 +78,12 @@ class News extends MY_Controller
 
         );
         echo $this->News_model->queryDataTree($array);
+    }
+
+    public function  initSingle()
+    {
+        $menuid = $this->input->post('menuid');
+        echo  $this->News_model->initSingle($menuid);
     }
 
     public function deleteNews()
@@ -210,6 +219,30 @@ class News extends MY_Controller
             }
             echo json_encode(array(
                 'errorMessage' => "",
+                'type' => "1"
+            ));
+        } catch (Exception $e) {
+            echo json_encode(array(
+                'errorMessage' => $e,
+                'type' => "0"
+            ));
+        }
+    }
+    public function addOrEditSingle()
+    {
+        try {
+            $id = $this->input->post('id');
+            $title = $this->input->post('title');
+            $content = $this->input->post('content');
+            $menuid = $this->input->post('menuid');
+            if ($id == false) {
+               $id= $this->News_model->addSingle($title, $content, $menuid);
+            } else {
+                $this->News_model->editSingle($id, $title, $content);
+            }
+            echo json_encode(array(
+                'errorMessage' => "",
+                'id'=>$id,
                 'type' => "1"
             ));
         } catch (Exception $e) {
