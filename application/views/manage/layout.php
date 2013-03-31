@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/common.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/style.css" />
     <link rel="stylesheet" href="<?php echo base_url();?>themes/kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>scripts/uploadify/uploadify.css">
 </head>
 <body class="easyui-layout">
 <!--north start-->
@@ -121,6 +122,9 @@
 <script type="text/javascript" src="<?php echo base_url();?>scripts/easyui-lang-zh_CN.js"></script>
 <script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/kindeditor-min.js"></script>
 <script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/zh_CN.js"></script>
+<script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/multiAttrList.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url();?>scripts/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" >

@@ -68,6 +68,7 @@ ImageOrVideoList.prototype={
             modal : true,
             resizable:true,
             maximizable:true,
+            inline:true,
             closed:true,
             buttons : [ {
                 text : '确定',
@@ -121,7 +122,7 @@ ImageOrVideoList.prototype={
             }
         })
     },
-    add:function add(){
+    add:function (){
         this.clear();
         $("#imageOrVideoPath"+this.menuid).html("");
         $("#imageOrVideoListMenuid"+this.menuid).val(this.menuid);

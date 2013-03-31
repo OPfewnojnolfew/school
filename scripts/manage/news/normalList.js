@@ -65,6 +65,7 @@ NormalList.prototype={
             modal : true,
             resizable:true,
             maximizable:true,
+            inline:true,
             closed:true,
             buttons : [ {
                 text : '确定',
@@ -118,7 +119,7 @@ NormalList.prototype={
             }
         })
     },
-    add:function add(){
+    add:function (){
         this.clear();
         $("#normalListMenuid"+this.menuid).val(this.menuid);
         $("#normalListWin"+this.menuid).dialog("open");

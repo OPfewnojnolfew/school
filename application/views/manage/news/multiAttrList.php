@@ -1,7 +1,5 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>scripts/uploadify/uploadify.css">
-<script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/multiAttrList.js"></script>
-<script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<!--<script type="text/javascript"-->
+<!--        src="--><?php //echo base_url();?><!--scripts/manage/news/multiAttrList.js"></script>-->
 
 <script type="text/javascript">
     $(function() {
@@ -46,7 +44,7 @@
                     </th>
                     <td>
                         <input id="file_upload<?php echo $menuid?>" name="file_upload" type="file">
-                        <div id="imageOrVideoPath<?php echo $menuid?>"></div>
+                        <div id="multiAttrPath<?php echo $menuid?>"></div>
                     </td>
                 </tr>
                 </tbody>

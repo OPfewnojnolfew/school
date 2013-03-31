@@ -10,6 +10,7 @@ $(function(){
         idField: 'id',
         treeField: 'name',
         singleSelect: true,
+        fitColumns: true,
         //height: 450,
         loadMsg: "数据加载中，请稍后...",
         //queryParams: { name: ($("#Name").val()).trim(), begin: $("#BeginTime").val(), end: $("#EndTime").val() },

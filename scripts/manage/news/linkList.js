@@ -59,10 +59,11 @@ LinkList.prototype={
         $('#linkListWin'+this.menuid).dialog({
             title:"",
             width:650,
-            height:520,
+            height:320,
             modal : true,
             resizable:true,
             maximizable:true,
+            inline:true,
             closed:true,
             buttons : [ {
                 text : '确定',
@@ -115,7 +116,7 @@ LinkList.prototype={
             }
         })
     },
-    add:function add(){
+    add:function (){
         this.clear();
         $("#linkListMenuid"+this.menuid).val(this.menuid);
         $("#linkListWin"+this.menuid).dialog("open");

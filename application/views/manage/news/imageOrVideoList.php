@@ -1,7 +1,7 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>scripts/uploadify/uploadify.css">
+
 <script type="text/javascript"
 	src="<?php echo base_url();?>scripts/manage/news/imageOrVideoList.js"></script>
-<script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
     $(function() {
