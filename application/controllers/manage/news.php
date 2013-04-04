@@ -26,7 +26,7 @@ class News extends MY_Controller
                 $this->load->view('manage/news/normalList', $data);
                 break;
             case 3:
-                $this->load->view('manage/news/imageOrVideoList', $data);
+                $this->load->view('manage/news/imageList', $data);
                 break;
             case 4:
                 $this->load->view('manage/news/linkList', $data);
@@ -36,6 +36,9 @@ class News extends MY_Controller
                 break;
             case 6:
                 $this->load->view('manage/news/masterSlaveList', $data);
+                break;
+            case 7:
+                $this->load->view('manage/news/videoList', $data);
                 break;
         }
 
@@ -66,6 +69,21 @@ class News extends MY_Controller
             'sort' => $this->input->post('sort'),
         );
         echo $this->News_model->queryData($array);
+    }
+
+    public function initDataImageOrVideo()
+    {
+        $array = array(
+            'menuid' => $this->input->post('menuid'),
+            'title' => $this->input->post('title'),
+            'begin' => $this->input->post('begin'),
+            'end' => $this->input->post('end'),
+            'page' => $this->input->post('page'),
+            'rows' => $this->input->post('rows'),
+            'order' => $this->input->post('order'),
+            'sort' => $this->input->post('sort'),
+        );
+        echo $this->News_model->queryDataImageOrVideo($array);
     }
 
     public function initDataTree()
@@ -228,6 +246,7 @@ class News extends MY_Controller
             ));
         }
     }
+
     public function addOrEditSingle()
     {
         try {
@@ -236,13 +255,13 @@ class News extends MY_Controller
             $content = $this->input->post('content');
             $menuid = $this->input->post('menuid');
             if ($id == false) {
-               $id= $this->News_model->addSingle($title, $content, $menuid);
+                $id = $this->News_model->addSingle($title, $content, $menuid);
             } else {
                 $this->News_model->editSingle($id, $title, $content);
             }
             echo json_encode(array(
                 'errorMessage' => "",
-                'id'=>$id,
+                'id' => $id,
                 'type' => "1"
             ));
         } catch (Exception $e) {

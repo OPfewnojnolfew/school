@@ -1,5 +1,6 @@
 function Single(menuid){
     this.menuid=menuid;
+    this.title=null;
     this.editor=null;
     this.id="";
     this.init();
@@ -7,11 +8,18 @@ function Single(menuid){
 Single.prototype={
     save:function(){
         var _this=this;
+        var title=$.trim(this.title.val());
+        if(title===""){
+            $.messager.alert("提示框","标题不能为空","",function(){
+                _this.title.focus();
+            });
+            return;
+        }
         var news={
             id:this.id,
             menuid:this.menuid,
-            title: $("#singleTitle"+_this.menuid).val(),
-            content:this.editor.html()
+            title:title,
+            content:this.editor.getContent()
         };
         $.post(global._prefix+"/manage/news/addOrEditSingle",news,function(res){
             res=eval("("+res+")");
@@ -25,21 +33,14 @@ Single.prototype={
     },
     init: function () {
         var _this=this;
-        this.editor = KindEditor.create("#singleContent" + this.menuid, {
-            resizeType: 1,
-            allowPreviewEmoticons: false,
-            allowImageUpload: false,
-            items: [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-        });
+        this.title= $("#singleTitle"+_this.menuid);
+        this.editor = UE.getEditor('singleContent'+this.menuid);
         $.post(global._prefix+"/manage/news/initSingle",{menuid:this.menuid},function(res){
             if(res!==""){
                 res=eval("("+res+")");
                 _this.id=res.id;
-                $("#singleTitle"+_this.menuid).val(res.title);
-                _this.editor.html(res.content);
+                _this.title.val(res.title);
+                _this.editor.setContent(res.content,false);
             }
         })
     }

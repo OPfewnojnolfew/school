@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
 <title>校团委后台管理</title>
 <head>
@@ -113,6 +114,7 @@
         <div title="首页" style="overflow:hidden; " >
         </div>
     </div>
+
 </div>
 <!--center end -->
 
@@ -123,10 +125,14 @@
 <script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/kindeditor-min.js"></script>
 <script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/zh_CN.js"></script>
 <script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>scripts/ueditor/editor_config.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>scripts/ueditor/editor_all_min.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url();?>scripts/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/single.js"></script>
+        src="<?php echo base_url(); ?>scripts/manage/news/single.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/masterSlaveList.js"></script>
 <script type="text/javascript" >
 
 $(function(){

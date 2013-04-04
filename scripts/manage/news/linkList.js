@@ -1,144 +1,185 @@
-function LinkList(menuid){
-    this.menuid=menuid;
+function LinkList(menuid) {
+    this.menuid = menuid;
+    this.id = "";
+    //表单
+    this.title = null;
+    this.url = null;
+    //搜索
+    this.searchTitle = null;
+    this.searchBegin = null;
+    this.searchEnd = null;
+    //弹框和列表
+    this.list = null;
+    this.dialog = null;
     this.init();
 }
-LinkList.prototype={
-    createTable: function (){
-        var _this=this;
-        $("#list"+this.menuid).datagrid({
-            striped : true,
-            idField : 'id',
-            pagination : true,
-            sortName : 'createtime',
-            fitColumns : true,
-            url : global._prefix+"/manage/news/initData",
-            queryParams:{menuid:_this.menuid},
-            frozenColumns : [ [ {
-                field : "ck",
-                checkbox : true
-            } ] ],
-            columns : [ [ {
-                field : 'title',
-                title : '标题',
-                width : 200,
-                sortable : true
-            },
-            {
-                field : 'linkurl',
-                title : '链接地址',
-                width : 100,
-                sortable : true
-            },
-            {
-                field : "createtime",
-                title : "创建时间",
-                width : 120,
-                sortable : true
-            }]],
-            onSortColumn : function() {
+LinkList.prototype = {
+    createTable: function () {
+        var _this = this;
+        this.list.datagrid({
+            striped: true,
+            idField: 'id',
+            pagination: true,
+            sortName: 'createtime',
+            sortOrder:"desc",
+            fitColumns: true,
+            url: global._prefix + "/manage/news/initData",
+            queryParams: {menuid: _this.menuid},
+            frozenColumns: [
+                [
+                    {
+                        field: "ck",
+                        checkbox: true
+                    }
+                ]
+            ],
+            columns: [
+                [
+                    {
+                        field: 'title',
+                        title: '标题',
+                        width: 200,
+                        sortable: true
+                    },
+                    {
+                        field: 'linkurl',
+                        title: '链接地址',
+                        width: 100
+                    },
+                    {
+                        field: "createtime",
+                        title: "创建时间",
+                        width: 120,
+                        sortable: true
+                    }
+                ]
+            ],
+            onSortColumn: function () {
                 _this.reloadList();
             },
-            onLoadSuccess:function(){
-                $("#list"+_this.menuid).datagrid("clearSelections");
+            onLoadSuccess: function () {
+                $(this).datagrid("clearSelections");
             },
-            onClickRow:function(rowIndex){
-                $("#list"+_this.menuid).datagrid("unselectRow",rowIndex);
+            onClickRow: function (rowIndex) {
+                $(this).datagrid("unselectRow", rowIndex);
             }
         });
     },
-    reloadList:function (){
-        $("#list"+this.menuid).datagrid("load", {
-            title : $("#title"+this.menuid).val(),
-            begin : $("#begin"+this.menuid).val(),
-            end : $("#end"+this.menuid).val(),
-            menuid:this.menuid
+    reloadList: function () {
+        this.list.datagrid("load", {
+            title: $.trim(this.searchTitle.val()),
+            begin: this.searchBegin.val(),
+            end: this.searchEnd.val(),
+            menuid: this.menuid
         });
     },
-    createDialog:function(){
-        var _this=this;
-        $('#linkListWin'+this.menuid).dialog({
-            title:"",
-            width:650,
-            height:320,
-            modal : true,
-            resizable:true,
-            maximizable:true,
-            inline:true,
-            closed:true,
-            buttons : [ {
-                text : '确定',
-                handler : function() {
-                    var postData={
-                        menuid:$("#linkListMenuid"+_this.menuid).val(),
-                        id:$("#linkListId"+_this.menuid).val(),
-                        title:$("#linkListTitle"+_this.menuid).val(),
-                        linkurl:$("#linkListUrl"+_this.menuid).val()
-                    }
-                    $.post(global._prefix+"/manage/news/addOrEditLinkList",postData,function(res){
-                        res=eval("("+res+")");
-                        if(res.type==="1"){
-                            _this.reloadList();
-                            $("#linkListWin"+_this.menuid).window("close");
-                        }else{
-                            $.messager.alert("提示框",res.errorMessage);
-                        }
-                    })
-                }},
+    createDialog: function () {
+        var _this = this;
+        this.dialog.dialog({
+            title: "",
+            width: 650,
+            height: 220,
+            modal: true,
+            resizable: true,
+            maximizable: true,
+            inline: true,
+            closed: true,
+            buttons: [
                 {
-                    text : '取消',
-                    handler : function() {
+                    text: '确定',
+                    handler: function () {
+                        var title = $.trim(_this.title.val());
+                        var url = $.trim(_this.url.val());
+                        if (title === "") {
+                            $.messager.alert("提示框", "标题不能为空", "", function () {
+                                _this.title.focus();
+                            });
+                            return;
+                        }
+                        if (url === "") {
+                            $.messager.alert("提示框", "链接地址不能为空", "", function () {
+                                _this.url.focus();
+                            });
+                            return;
+                        }
+                        var postData = {
+                            menuid: _this.menuid,
+                            id: _this.id,
+                            title: title,
+                            linkurl: url
+                        }
+                        $.post(global._prefix + "/manage/news/addOrEditLinkList", postData, function (res) {
+                            res = eval("(" + res + ")");
+                            if (res.type === "1") {
+                                _this.reloadList();
+                                _this.dialog.window("close");
+                            } else {
+                                $.messager.alert("提示框", res.errorMessage);
+                            }
+                        })
+                    }},
+                {
+                    text: '取消',
+                    handler: function () {
                         _this.clear();
-                        $("#linkListWin"+_this.menuid).window("close");
+                        _this.dialog.window("close");
+                    }
                 }
-            } ]
+            ]
         });
     },
-    mDel:function (){
-        var _this=this;
-        var rows = $("#list"+this.menuid).datagrid("getSelections");
+    mDel: function () {
+        var _this = this;
+        var rows = this.list.datagrid("getSelections");
         var deleteIds = [];
-        for ( var i = 0; i < rows.length; i++) {
+        for (var i = 0; i < rows.length; i++) {
             deleteIds.push("'" + rows[i].id + "'");
         }
         if (deleteIds == false) {
             return;
         }
-        $.messager.confirm("提示框", "确定删除吗", function(r) {
+        $.messager.confirm("提示框", "确定删除吗", function (r) {
             if (r) {
-                $.post(global._prefix+"/manage/news/deleteNews",{ids:deleteIds.toString()},function(res){
-                    res=eval("("+res+")");
-                    if(res.type==="1"){
+                $.post(global._prefix + "/manage/news/deleteNews", {ids: deleteIds.toString()}, function (res) {
+                    res = eval("(" + res + ")");
+                    if (res.type === "1") {
                         _this.reloadList();
-                    }else{
-                        $.messager.alert("提示框",res.errorMessage);
+                    } else {
+                        $.messager.alert("提示框", res.errorMessage);
                     }
                 });
             }
         })
     },
-    add:function (){
+    add: function () {
         this.clear();
-        $("#linkListMenuid"+this.menuid).val(this.menuid);
-        $("#linkListWin"+this.menuid).dialog("open");
+        this.dialog.dialog("open");
     },
-    edit:function (){
-        var selectedNode=$("#list"+this.menuid).datagrid("getSelected");
-        if(selectedNode===null){
-            $.messager.alert("提示框","请选择要编辑的项");
+    edit: function () {
+        var selectedNode = this.list.datagrid("getSelected");
+        if (selectedNode === null) {
+            $.messager.alert("提示框", "请选择要编辑的项");
             return;
         }
-        $("#linkListId"+this.menuid).val(selectedNode.id);
-        $("#linkListTitle"+this.menuid).val(selectedNode.title);
-        $("#linkListUrl"+this.menuid).val(selectedNode.linkurl);
-        $("#linkListWin"+this.menuid).window("open");
+        this.id = selectedNode.id;
+        this.title.val(selectedNode.title);
+        this.url.val(selectedNode.linkurl);
+        this.dialog.window("open");
     },
-    clear:function(){
-        $("#linkListMenuid"+this.menuid).val("");
-        $("#linkListId"+this.menuid).val("");
-        $("#linkListTitle"+this.menuid).val("");
-        $("#linkListUrl"+this.menuid).val("");
+    clear: function () {
+        this.id = "",
+            this.title.val("");
+        this.url.val("");
     },
-    init:function(){
+    init: function () {
+        this.title = $("#linkListTitle" + this.menuid);
+        this.url = $("#linkListUrl" + this.menuid);
+
+        this.searchTitle = $("#title" + this.menuid);
+        this.searchBegin = $("#begin" + this.menuid);
+        this.searchEnd = $("#end" + this.menuid);
+        this.list = $("#list" + this.menuid);
+        this.dialog = $('#linkListWin' + this.menuid);
         this.createTable();
         this.createDialog();
     }

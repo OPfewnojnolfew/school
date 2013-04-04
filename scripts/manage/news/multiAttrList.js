@@ -1,18 +1,30 @@
 function MultiAttrList(menuid) {
     this.menuid = menuid;
-    this.editor = null,
-        this.attachment = [],
-        this.init();
-
+    this.id = "";
+    this.attachment = [];
+    //表单
+    this.editor = null;
+    this.title = null;
+    this.uploadFile = null;
+    this.viewFile = null;
+    //搜索
+    this.searchTitle = null;
+    this.searchBegin = null;
+    this.searchEnd = null;
+    //弹框和列表
+    this.list = null;
+    this.dialog = null;
+    this.init();
 }
 MultiAttrList.prototype = {
     createTable: function () {
         var _this = this;
-        $("#list" + this.menuid).datagrid({
+        this.list.datagrid({
             striped: true,
             idField: 'id',
             pagination: true,
             sortName: 'createtime',
+            sortOrder:'desc',
             fitColumns: true,
             url: global._prefix + "/manage/news/initData",
             queryParams: {menuid: _this.menuid},
@@ -50,27 +62,27 @@ MultiAttrList.prototype = {
                 _this.reloadList();
             },
             onLoadSuccess: function () {
-                $("#list" + _this.menuid).datagrid("clearSelections");
+                $(this).datagrid("clearSelections");
             },
             onClickRow: function (rowIndex) {
-                $("#list" + _this.menuid).datagrid("unselectRow", rowIndex);
+                $(this).datagrid("unselectRow", rowIndex);
             }
         });
     },
     reloadList: function () {
-        $("#list" + this.menuid).datagrid("load", {
-            title: $("#title" + this.menuid).val(),
-            begin: $("#begin" + this.menuid).val(),
-            end: $("#end" + this.menuid).val(),
+        this.list.datagrid("load", {
+            title: $.trim(this.searchTitle.val()),
+            begin: this.searchBegin.val(),
+            end: this.searchEnd.val(),
             menuid: this.menuid
         });
     },
     createDialog: function () {
         var _this = this;
-        $('#multiAttrListWin' + this.menuid).dialog({
+        this.dialog.dialog({
             title: "",
-            width: 650,
-            height: 520,
+            width: 900,
+            height: 550,
             modal: true,
             resizable: true,
             maximizable: true,
@@ -80,23 +92,29 @@ MultiAttrList.prototype = {
                 {
                     text: '确定',
                     handler: function () {
-
+                        var title = $.trim(_this.title.val());
+                        if (title === "") {
+                            $.messager.alert("提示框", "标题不能为空", "", function () {
+                                _this.title.focus();
+                            });
+                            return;
+                        }
                         var attachmentIDs = [];
                         for (var i = 0; i < _this.attachment.length; i++) {
                             attachmentIDs.push(_this.attachment[i].attachmentID);
                         }
                         var postData = {
-                            menuid: $("#multiAttrListMenuid" + _this.menuid).val(),
-                            id: $("#multiAttrListId" + _this.menuid).val(),
-                            title: $("#multiAttrListTitle" + _this.menuid).val(),
+                            menuid: _this.menuid,
+                            id:  _this.id,
+                            title: title,
                             attachmentIDs: attachmentIDs.toString(),
-                            content: _this.editor.html()
+                            content: _this.editor.getContent()
                         }
                         $.post(global._prefix + "/manage/news/addOrEditMultiAttrList", postData, function (res) {
                             res = eval("(" + res + ")");
                             if (res.type === "1") {
                                 _this.reloadList();
-                                $("#multiAttrListWin" + _this.menuid).window("close");
+                                _this.dialog.window("close");
                             } else {
                                 $.messager.alert("提示框", res.errorMessage);
                             }
@@ -106,7 +124,7 @@ MultiAttrList.prototype = {
                     text: '取消',
                     handler: function () {
                         _this.clear();
-                        $("#multiAttrListWin" + _this.menuid).window("close");
+                        _this.dialog.window("close");
                     }
                 }
             ]
@@ -114,7 +132,7 @@ MultiAttrList.prototype = {
     },
     mDel: function () {
         var _this = this;
-        var rows = $("#list" + this.menuid).datagrid("getSelections");
+        var rows = this.list.datagrid("getSelections");
         var deleteIds = [];
         for (var i = 0; i < rows.length; i++) {
             deleteIds.push("'" + rows[i].id + "'");
@@ -137,19 +155,19 @@ MultiAttrList.prototype = {
     },
     add: function () {
         this.clear();
-        $("#multiAttrPath" + this.menuid).html("");
-        $("#multiAttrListMenuid" + this.menuid).val(this.menuid);
-        $("#multiAttrListWin" + this.menuid).dialog("open");
+        this.dialog.dialog("open");
     },
     edit: function () {
         this.clear();
         var _this = this;
-        var selectedNode = $("#list" + this.menuid).datagrid("getSelected");
+        var selectedNode = this.list.datagrid("getSelected");
         if (selectedNode === null) {
             $.messager.alert("提示框", "请选择要编辑的项");
             return;
         }
-        $("#multiAttrPath" + _this.menuid).html("");
+        this.id=selectedNode.id;
+        this.title.val(selectedNode.title);
+        _this.editor.setContent(selectedNode.content,false);
         $.post(global._prefix + "/manage/uploadify/getMultiAttachment", {newsid: selectedNode.id}, function (res) {
             res = eval("(" + res + ")");
             if (res.type === "1") {
@@ -157,23 +175,19 @@ MultiAttrList.prototype = {
                     _this.additionAttachment(res.attachment[i]);
                 }
             }
-            $("#multiAttrListId" + _this.menuid).val(selectedNode.id);
-            $("#multiAttrListTitle" + _this.menuid).val(selectedNode.title);
-            _this.editor.html(selectedNode.content);
-            $("#multiAttrListWin" + _this.menuid).window("open");
         });
-
+        this.dialog.window("open");
     },
     clear: function () {
-        $("#multiAttrListMenuid" + this.menuid).val("");
-        $("#multiAttrListId" + this.menuid).val("");
-        $("#multiAttrListTitle" + this.menuid).val("");
-        this.editor.html("");
+        this.id = "";
+        this.title.val("")
+        this.viewFile.html("");
+        this.editor.setContent("", false);
         this.attachment = [];
     },
     upload: function () {
         var _this = this;
-        $('#file_upload' + this.menuid).uploadify({
+        this.uploadFile.uploadify({
             'swf': global._prefix + '/scripts/uploadify/uploadify.swf?val=' + Math.random(),
             'uploader': global._prefix + '/manage/Uploadify/multiUpload',
             'folder': global._prefix + '/files/multiAttr/',
@@ -199,29 +213,31 @@ MultiAttrList.prototype = {
                 var maxSize = 1024 * 1024 * 2000;
                 if (fileObj.size > maxSize) {
                     $.messager.alert("提示框", "上传文件不能超过2G");
-                    $('#file_upload' + _this.menuid).uploadify('cancel');
+                    $(this).uploadify('cancel');
                     return false;
                 }
                 if (fileObj.type.toUpperCase() === ".EXE") {
                     $.messager.alert("提示框", "为了安全，不能上传exe文件");
-                    $('#file_upload' + _this.menuid).uploadify('cancel');
+                    $(this).uploadify('cancel');
                     return false;
                 }
             }
         });
     },
     init: function () {
+        this.title = $("#multiAttrListTitle" + this.menuid);
+        this.editor = UE.getEditor('multiAttrListContent' + this.menuid);
+        this.uploadFile = $('#file_upload' + this.menuid);
+
+        this.searchTitle = $("#title" + this.menuid);
+        this.searchBegin = $("#begin" + this.menuid);
+        this.searchEnd = $("#end" + this.menuid);
+        this.list = $("#list" + this.menuid);
+        this.dialog = $('#multiAttrListWin' + this.menuid);
+        this.viewFile = $('#multiAttrPath' + this.menuid);
+
         this.createTable();
         this.createDialog();
-        this.editor = KindEditor.create("#multiAttrListContent" + this.menuid, {
-            resizeType: 1,
-            allowPreviewEmoticons: false,
-            allowImageUpload: false,
-            items: [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-        });
         this.upload();
     },
     additionAttachment: function (attr) {
@@ -229,7 +245,7 @@ MultiAttrList.prototype = {
         _this.attachment.push({attachmentID: attr.attachmentID, attachmentPath: attr.attachmentPath, attachmentName: attr.attachmentName})
         var dv = $("<div></div>");
         var spanName = $("<span>" + attr.attachmentName + "</span>");
-        var aDel = $('<a href="javascript:void(0)" delattr="' + attr.attachmentID + '">删除</a>');
+        var aDel = $('<a href="javascript:void(0)" delattr="' + attr.attachmentID + '"><img src="'+global._prefix+'/themes/images/no.png"></a>');
         aDel.click(function () {
             var that = this;
             $.post(global._prefix + "/manage/uploadify/delete", {attachmentID: $(this).attr("delattr"), callback: Math.random()}, function (res) {
@@ -238,7 +254,7 @@ MultiAttrList.prototype = {
                     $(that).parent().remove();
                     for (var j = 0; j < _this.attachment.length; j++) {
                         if (_this.attachment[j].attachmentID == $(that).attr("delattr")) {
-                            _this.attachment.splice(j,1);
+                            _this.attachment.splice(j, 1);
                         }
                     }
                 }
@@ -249,7 +265,7 @@ MultiAttrList.prototype = {
         })
         dv.append(spanName);
         dv.append(aDel)
-        $("#multiAttrPath" + _this.menuid).append(dv);
+        _this.viewFile.append(dv);
     }
 
 }

@@ -26,9 +26,6 @@
 </div>
 <table id="list<?php echo $menuid?>" toolbar="#searchbar<?php echo $menuid?>"></table>
 <div id="normalListWin<?php echo $menuid?>" class="easyui-dialog">
-
-        <input type="hidden" id="normalListMenuid<?php echo $menuid?>">
-        <input type="hidden" id="normalListId<?php echo $menuid?>">
         <div class="division">
             <table width="100%" cellspacing="0" cellpadding="0" border="0" class="shopping_setting">
                 <tbody>
@@ -51,8 +48,9 @@
                         内容
                     </th>
                     <td>
-                        <textarea id="normalListContent<?php echo $menuid?>" style="width: 100%; height:350px;">
-                        </textarea>
+
+                            <script  id="normalListContent<?php echo $menuid ?>" type="text/plain" > </script>
+
                     </td>
                 </tr>
 

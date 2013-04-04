@@ -20,11 +20,36 @@ class News_model extends CI_Model
             $whereCondition .= " AND createtime<='" . $array['end'] . "'";
         }
         $whereCondition .= " AND menuid='" . $array['menuid'] . "'";
+        $totalarr = $this->db->query('SELECT COUNT(1) AS total FROM news  WHERE ' . $whereCondition)->result();
         $whereCondition .= " ORDER BY " . $array['sort'] . " " . $array['order'] . "";
         $whereCondition .= " LIMIT " . $offset . "," . $array['rows'] . "";
-        $totalarr = $this->db->query('SELECT COUNT(1) AS total FROM news')->result();
+        //$totalarr = $this->db->query('SELECT COUNT(1) AS total FROM news')->result();
         $total = $totalarr [0]->total;
-        $news = $this->db->query("SELECT * FROM news WHERE $whereCondition")->result();
+        $news = $this->db->query('SELECT * FROM news WHERE ' . $whereCondition)->result();
+        return "{\"total\":$total,\"rows\":" . json_encode($news) . "}";
+    }
+
+    function  queryDataImageOrVideo($array)
+    {
+        $offset = ($array['page'] - 1) * $array['rows'];
+        $whereCondition = "1=1";
+        if (!empty ($array['title'])) {
+            $whereCondition .= " AND title LIKE '%" . $array['title'] . "%'";
+        }
+        if (!empty ($array['begin'])) {
+            $whereCondition .= " AND createtime>='" . $array['begin'] . "'";
+        }
+        if (!empty ($array['end'])) {
+            $whereCondition .= " AND createtime<='" . $array['end'] . "'";
+        }
+        $whereCondition .= " AND menuid='" . $array['menuid'] . "'";
+        $totalarr = $this->db->query('SELECT COUNT(1) AS total FROM news  WHERE ' . $whereCondition)->result();
+        $whereCondition .= " GROUP BY id";
+        $whereCondition .= " ORDER BY " . $array['sort'] . " " . $array['order'] . "";
+        $whereCondition .= " LIMIT " . $offset . "," . $array['rows'] . "";
+        //$totalarr = $this->db->query('SELECT COUNT(1) AS total FROM news')->result();
+        $total = $totalarr [0]->total;
+        $news = $this->db->query('SELECT id,title,content,readcount,linkurl,createtime,attachmentID,attachmentName,attachmentPath FROM news LEFT JOIN attachment ON news.id=attachment.newsid WHERE ' . $whereCondition)->result();
         return "{\"total\":$total,\"rows\":" . json_encode($news) . "}";
     }
 
@@ -41,18 +66,20 @@ class News_model extends CI_Model
             $whereCondition .= " AND createtime<='" . $array['end'] . "'";
         }
         $whereCondition .= " AND menuid='" . $array['menuid'] . "'";
+        $whereCondition .= " GROUP BY id";
         $query = $this->db->query("SELECT id,pid,( CASE pid WHEN '0' THEN '' ELSE pid END) as _parentId, title,content,menuid,readcount,createtime,attachmentID,attachmentPath,attachmentName FROM news LEFT JOIN attachment ON attachment.newsid=news.id WHERE " . $whereCondition);
         return json_encode(array(
             'total' => $query->num_rows,
             'rows' => $query->result_array(),
         ));
     }
+
     public function  initSingle($menuid)
     {
         if (!empty($menuid)) {
             $news = $this->db->query("SELECT id, title,content,menuid FROM news WHERE menuid='{$menuid}'");
-            if( $news->num_rows==1){
-                $new=$news->first_row();
+            if ($news->num_rows == 1) {
+                $new = $news->first_row();
                 return json_encode($new);
             }
         }
@@ -121,12 +148,13 @@ class News_model extends CI_Model
         );
         $this->db->insert('news', $data);
         $newsid = $this->db->insert_id();
-
-        $attrdata = array(
-            'newsid' => $newsid
-        );
-        $this->db->where('attachmentID', $attachmentID);
-        $this->db->update('attachment', $attrdata);
+        if (!empty($attachmentID)) {
+            $attrdata = array(
+                'newsid' => $newsid
+            );
+            $this->db->where('attachmentID', $attachmentID);
+            $this->db->update('attachment', $attrdata);
+        }
     }
 
     function editImageOrVideoList($id, $title, $content, $attachmentID)
@@ -135,12 +163,10 @@ class News_model extends CI_Model
             'title' => $title,
             'content' => $content
         );
+        $this->db->where('id', $id);
+        $this->db->update('news', $data);
         if (!empty($attachmentID)) {
-            $this->db->where('id', $id);
-            $this->db->update('news', $data);
             $this->db->query("DELETE FROM attachment WHERE newsid=" . $id . " AND attachmentID !=" . $attachmentID . "");
-
-
             $attrdata = array(
                 'newsid' => $id
             );
@@ -177,10 +203,11 @@ class News_model extends CI_Model
             $this->db->query("UPDATE attachment SET newsid=" . $id . " WHERE attachmentID IN(" . $attachmentIDs . ")");
         }
     }
-    function addMaterSlaveList($pid,$title, $content, $menuid, $attachmentID)
+
+    function addMaterSlaveList($pid, $title, $content, $menuid, $attachmentID)
     {
         $data = array(
-            'pid'=>$pid,
+            'pid' => $pid,
             'title' => $title,
             'content' => $content,
             'menuid' => $menuid
@@ -201,12 +228,10 @@ class News_model extends CI_Model
             'title' => $title,
             'content' => $content
         );
+        $this->db->where('id', $id);
+        $this->db->update('news', $data);
         if (!empty($attachmentID)) {
-            $this->db->where('id', $id);
-            $this->db->update('news', $data);
             $this->db->query("DELETE FROM attachment WHERE newsid=" . $id . " AND attachmentID !=" . $attachmentID . "");
-
-
             $attrdata = array(
                 'newsid' => $id
             );
@@ -214,6 +239,7 @@ class News_model extends CI_Model
             $this->db->update('attachment', $attrdata);
         }
     }
+
     function addSingle($title, $content, $menuid)
     {
         $data = array(

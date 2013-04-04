@@ -1,22 +1,32 @@
 function MasterSlaveList(menuid) {
     this.menuid = menuid;
-    this.editor = null,
-        this.attachmentPath = "",
-        this.attachmentID = "",
-        this.attachmentName = "",
-        this.pid = "",
-        this.init();
+    this.id = "";
+    this.pid = "";
+
+    this.title = null;
+    this.editor = null;
+    this.uploadImage = null;
+    this.viewImage = null;
+
+    this.attachmentPath = "";
+    this.attachmentID = "";
+    this.attachmentName = "";
+
+    this.treeList = null;
+    this.dialog = null;
+    this.init();
 
 }
 MasterSlaveList.prototype = {
     createTable: function () {
         var _this = this;
-        $("#treelist" + this.menuid).treegrid({
+        this.treeList.treegrid({
             striped: true,
             idField: 'id',
             treeField: 'title',
             pagination: true,
             sortName: 'createtime',
+            sortOrder: 'desc',
             fitColumns: true,
             url: global._prefix + "/manage/news/initDataTree",
             queryParams: {menuid: _this.menuid},
@@ -52,44 +62,51 @@ MasterSlaveList.prototype = {
                 _this.reloadList();
             },
             onLoadSuccess: function () {
-                $("#treelist" + _this.menuid).treegrid("clearSelections");
+                $(this).treegrid("clearSelections");
             },
             onClickRow: function (rowIndex) {
-                $("#treelist" + _this.menuid).treegrid("unselectRow", rowIndex);
+                $(this).treegrid("unselectRow", rowIndex);
             }
         });
     },
     reloadList: function () {
-       this.createTable();
+        this.createTable();
     },
     createDialog: function () {
         var _this = this;
-        $('#masterSlaveListWin' + this.menuid).dialog({
+        this.dialog.dialog({
             title: "",
-            width: 650,
-            height: 520,
+            width: 900,
+            height: 550,
             modal: true,
             resizable: true,
             maximizable: true,
-            inline:true,
+            inline: true,
             closed: true,
             buttons: [
                 {
                     text: '确定',
                     handler: function () {
+                        var title = $.trim(_this.title.val());
+                        if (title === "") {
+                            $.messager.alert("提示框", "标题不能为空", "", function () {
+                                _this.title.focus();
+                            });
+                            return;
+                        }
                         var postData = {
                             pid: _this.pid,
                             menuid: _this.menuid,
-                            id: $("#masterSlaveListId" + _this.menuid).val(),
-                            title: $("#masterSlaveListTitle" + _this.menuid).val(),
+                            id: _this.id,
+                            title: title,
                             attachmentID: _this.attachmentID,
-                            content: _this.editor.html()
+                            content: _this.editor.getContent()
                         }
                         $.post(global._prefix + "/manage/news/addOrEditMasterSlaveList", postData, function (res) {
                             res = eval("(" + res + ")");
                             if (res.type === "1") {
                                 _this.reloadList();
-                                $("#masterSlaveListWin" + _this.menuid).window("close");
+                                _this.dialog.window("close");
                             } else {
                                 $.messager.alert("提示框", res.errorMessage);
                             }
@@ -99,17 +116,23 @@ MasterSlaveList.prototype = {
                     text: '取消',
                     handler: function () {
                         _this.clear();
-                        $("#masterSlaveListWin" + _this.menuid).window("close");
+                        _this.dialog.window("close");
                     }
                 }
             ]
         });
     },
+    //需要修改，若删除父级
     mDel: function () {
         var _this = this;
-        var rows = $("#treelist" + this.menuid).treegrid("getSelections");
+        var rows = _this.treeList.treegrid("getSelections");
         var deleteIds = [];
         for (var i = 0; i < rows.length; i++) {
+            console.log(_this.treeList.treegrid("getChildren", rows[i].id));
+            if (_this.treeList.treegrid("getChildren", rows[i].id).length > 0) {
+                $.messager.alert("提示框", "请先删除子元素");
+                return;
+            }
             deleteIds.push("'" + rows[i].id + "'");
         }
         if (deleteIds == false) {
@@ -130,64 +153,51 @@ MasterSlaveList.prototype = {
     },
     add: function () {
         this.clear();
-        this.pid = "";
-        $("#masterSlavePath" + this.menuid).html("");
-        $("#masterSlaveListMenuid" + this.menuid).val(this.menuid);
-        $("#masterSlaveListWin" + this.menuid).dialog("open");
+        this.dialog.dialog("open");
     },
     addNext: function () {
-        var selectedNode = $("#treelist" + this.menuid).treegrid("getSelected");
+        var selectedNode = this.treeList.treegrid("getSelected");
         if (selectedNode === null) {
             $.messager.alert("提示框", "请选择要增添的上级");
             return;
         }
         this.clear();
         this.pid = selectedNode.id;
-        $("#masterSlavePath" + this.menuid).html("");
-        $("#masterSlaveListMenuid" + this.menuid).val(this.menuid);
-        $("#masterSlaveListWin" + this.menuid).dialog("open");
+        this.dialog.dialog("open");
     },
     edit: function () {
         this.clear();
         var _this = this;
-        var selectedNode = $("#treelist" + this.menuid).treegrid("getSelected");
+        var selectedNode = this.treeList.treegrid("getSelected");
         if (selectedNode === null) {
             $.messager.alert("提示框", "请选择要编辑的项");
             return;
         }
         this.pid = selectedNode.pid;
-        $("#masterSlavePath" + _this.menuid).html("");
-//        $.post(global._prefix+"/manage/uploadify/getAttachment",{newsid:selectedNode.id},function(res){
-//            res=eval("("+res+")");
-//            if(res.type==="1"){
-//                _this.attachmentPath=res.attachmentPath;
-//                _this.attachmentID=res.attachmentID;
-//                _this.attachmentName=res.attachmentName;
-//                $("#masterSlavePath"+_this.menuid).html("<span>"+res.attachmentName+"</span>");
-//            }
-        _this.attachmentPath = selectedNode.attachmentPath?selectedNode.attachmentPath:"";
-        _this.attachmentID = selectedNode.attachmentID?selectedNode.attachmentID:"";
-        _this.attachmentName = selectedNode.attachmentName?selectedNode.attachmentName:"";
-        $("#masterSlavePath"+_this.menuid).html("<span>"+ _this.attachmentName+"</span>");
-        $("#masterSlaveListId" + _this.menuid).val(selectedNode.id);
-        $("#masterSlaveListTitle" + _this.menuid).val(selectedNode.title);
-        _this.editor.html(selectedNode.content);
-        $("#masterSlaveListWin" + _this.menuid).window("open");
-//        });
-
+        this.id = selectedNode.id;
+        this.title.val(selectedNode.title);
+        this.editor.setContent(selectedNode.content, false);
+        if (selectedNode.attachmentID !== null) {
+            this.attachmentPath = selectedNode.attachmentPath ? selectedNode.attachmentPath : "";
+            this.attachmentID = selectedNode.attachmentID ? selectedNode.attachmentID : "";
+            this.attachmentName = selectedNode.attachmentName ? selectedNode.attachmentName : "";
+            this.viewImage.html("<img src='" + global._prefix + "/" + selectedNode.attachmentPath + "' alt='" + selectedNode.attachmentName + "'>");
+        }
+        this.dialog.window("open");
     },
     clear: function () {
-        $("#masterSlaveListMenuid" + this.menuid).val("");
-        $("#masterSlaveListId" + this.menuid).val("");
-        $("#masterSlaveListTitle" + this.menuid).val("");
-        this.editor.html("");
+        this.id = "";
+        this.pid = "";
+        this.title.val("");
+        this.viewImage.html("");
+        this.editor.setContent("", false);
         this.attachmentPath = "";
         this.attachmentID = "";
         this.attachmentName = "";
     },
     upload: function () {
         var _this = this;
-        $('#file_upload' + this.menuid).uploadify({
+        this.uploadImage.uploadify({
             'swf': global._prefix + '/scripts/uploadify/uploadify.swf?val=' + Math.random(),
             'uploader': global._prefix + '/manage/Uploadify/upload',
             'folder': global._prefix + '/files/masterslave/',
@@ -205,7 +215,7 @@ MasterSlaveList.prototype = {
                     _this.attachmentID = msg.attachmentID;
                     _this.attachmentName = msg.attachmentName;
                     _this.attachmentPath = msg.attachmentPath;
-                    $("#masterSlavePath" + _this.menuid).html("<span>" + msg.attachmentName + "</span>");
+                    _this.viewImage.html("<img src='" + global._prefix + "/" + msg.attachmentPath + "' alt='" + msg.attachmentName + "'>");
                 } else {
                     $.messager.alert("提示框", msg.errMessage);
                 }
@@ -215,29 +225,29 @@ MasterSlaveList.prototype = {
                 var maxSize = 1024 * 1024 * 2000;
                 if (fileObj.size > maxSize) {
                     $.messager.alert("提示框", "上传文件不能超过2G");
-                    $('#file_upload' + _this.menuid).uploadify('cancel');
+                    $(this).uploadify('cancel');
                     return false;
                 }
                 if (fileObj.type.toUpperCase() === ".EXE") {
                     $.messager.alert("提示框", "为了安全，不能上传exe文件");
-                    $('#file_upload' + _this.menuid).uploadify('cancel');
+                    $(this).uploadify('cancel');
                     return false;
                 }
             }
         });
     },
     init: function () {
+        this.title = $("#masterSlaveListTitle" + this.menuid);
+        this.editor = UE.getEditor('masterSlaveListContent' + this.menuid);
+
+        this.uploadImage = $('#file_upload' + this.menuid);
+        this.viewImage = $('#masterSlavePath' + this.menuid);
+
+        this.treeList = $("#treelist" + this.menuid);
+        this.dialog = $('#masterSlaveListWin' + this.menuid);
+
         this.createTable();
         this.createDialog();
-        this.editor = KindEditor.create("#masterSlaveListContent" + this.menuid, {
-            resizeType: 1,
-            allowPreviewEmoticons: false,
-            allowImageUpload: false,
-            items: [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-        });
         this.upload();
     }
 }

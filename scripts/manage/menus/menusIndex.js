@@ -29,11 +29,13 @@ $(function(){
                                 case "4":
                                     return "链接列表";
                     			case "3":
-                    				return "图片或视频列表";
+                    				return "图片列表";
                     			case "5":
                     				return "附件列表";
                                 case "6":
                                     return "主从列表";
+                                case "7":
+                                    return "视频列表";
                     			default:
                     				return "";
                     		}

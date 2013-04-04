@@ -23,9 +23,6 @@
 </div>
 <table id="list<?php echo $menuid?>" toolbar="#searchbar<?php echo $menuid?>"></table>
 <div id="linkListWin<?php echo $menuid?>" class="easyui-dialog">
-
-        <input type="hidden" id="linkListMenuid<?php echo $menuid?>">
-        <input type="hidden" id="linkListId<?php echo $menuid?>">
         <div class="division">
             <table width="100%" cellspacing="0" cellpadding="0" border="0" class="shopping_setting">
                 <tbody>

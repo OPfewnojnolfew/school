@@ -1,6 +1,6 @@
 
-<script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/masterSlaveList.js"></script>
+<!--<script type="text/javascript"-->
+<!--        src="--><?php //echo base_url();?><!--scripts/manage/news/masterSlaveList.js"></script>-->
 
 <script type="text/javascript">
     $(function() {
@@ -27,9 +27,6 @@
 </div>
 <table id="treelist<?php echo $menuid?>" toolbar="#searchbar<?php echo $menuid?>"></table>
 <div id="masterSlaveListWin<?php echo $menuid?>" class="easyui-dialog">
-
-        <input type="hidden" id="masterSlaveListMenuid<?php echo $menuid?>">
-        <input type="hidden" id="masterSlaveListId<?php echo $menuid?>">
         <div class="division">
             <table width="100%" cellspacing="0" cellpadding="0" border="0" class="shopping_setting">
                 <tbody>
@@ -61,8 +58,9 @@
                         内容
                     </th>
                     <td>
-                        <textarea id="masterSlaveListContent<?php echo $menuid?>" style="width: 100%; height:350px;">
-                        </textarea>
+                        <div>
+                            <script  id="masterSlaveListContent<?php echo $menuid ?>" type="text/plain"> </script>
+                        </div>
                     </td>
                 </tr>
 

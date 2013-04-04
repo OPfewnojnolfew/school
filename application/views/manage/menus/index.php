@@ -26,10 +26,12 @@
 								<option value="">--请选择--</option>
 								<option value="1">简介</option>
 								<option value="2">一般列表</option>
-								<option value="3">图片和视频列表</option>
+								<option value="3">图片列表</option>
+                                <option value="7">视频列表</option>
 								<option value="4">链接列表</option>
                                 <option value="5">附件列表</option>
                                 <option value="6">主从列表</option>
+
 							</select>
 	
 					</li>

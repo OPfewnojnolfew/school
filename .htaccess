@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteCond $1 !^(index\.php|scripts|themes|images|robots\.txt)
+RewriteCond $1 !^(index\.php|scripts|upload|themes|images|robots\.txt)
 RewriteRule ^(.*)$ /school/index.php/$1 [L]
 

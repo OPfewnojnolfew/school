@@ -1,8 +1,11 @@
-
+<!--<script type="text/javascript"-->
+<!--        src="--><?php //echo base_url(); ?><!--scripts/manage/news/single.js"></script>-->
 <script type="text/javascript">
-    $(function(){
-        var single=new Single("<?php echo $menuid?>");
-        $("#Save<?php echo $menuid ?>").click(function(){single.save()});
+    $(function () {
+        var single = new Single("<?php echo $menuid?>");
+        $("#Save<?php echo $menuid ?>").click(function () {
+            single.save()
+        });
     })
 </script>
 <div class="division">
@@ -28,8 +31,12 @@
                 内容
             </th>
             <td>
-                <textarea id="singleContent<?php echo $menuid ?>" style="width: 100%; height:350px;">
-                </textarea>
+                <div>
+                    <script  id="singleContent<?php echo $menuid ?>" type="text/plain"> </script>
+                </div>
+
+
+
             </td>
         </tr>
 
