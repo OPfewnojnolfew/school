@@ -56,7 +56,7 @@ Menu.prototype = {
                 ]
             ],
             onLoadSuccess: function () {
-                $(this).treegrid("unselectAll");
+                $(this).treegrid("clearSelections");
             },
             onDblClickRow: function (row) {
                 _this.id = row.id;
