@@ -2,13 +2,13 @@
 <html>
 <title>校团委后台管理</title>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/reset.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/easyuithemes/icon.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/easyuithemes/gray/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/common.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/style.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>scripts/uploadify/uploadify.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>themes/manage/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>themes/easyuithemes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>themes/easyuithemes/gray/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>themes/manage/common.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>themes/manage/style.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>scripts/uploadify/uploadify.css">
 </head>
 <body class="easyui-layout">
 <!--north start-->
@@ -18,7 +18,12 @@
         [<strong></strong>]，欢迎你！您使用[<strong>123.232.103.195</strong>]IP登录！
     </div>
     <div style="position: absolute; right: 0px; bottom: 0px; ">
-        <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'icon-ok'">更换皮肤</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'icon-help'">控制面板</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_zxMenu',iconCls:'icon-back'">注销</a>
+        <a href="javascript:void(0);" class="easyui-menubutton"
+           data-options="menu:'#layout_north_pfMenu',iconCls:'icon-ok'">更换皮肤</a> <a href="javascript:void(0);"
+                                                                                    class="easyui-menubutton"
+                                                                                    data-options="menu:'#layout_north_kzmbMenu',iconCls:'icon-help'">控制面板</a>
+        <a href="javascript:void(0);" class="easyui-menubutton"
+           data-options="menu:'#layout_north_zxMenu',iconCls:'icon-back'">注销</a>
     </div>
     <div id="layout_north_pfMenu" style="width: 120px; display: none;">
         <div onclick="changeTheme('default');">default</div>
@@ -51,21 +56,31 @@
                 <li data-options="state:'open'">
                     <span>新闻管理</span>
                     <ul>
-                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/news/')?>" type="nav_head" rel="">新闻列表</a></li>
-                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/menus/')?>" type="nav_foot" rel="">新闻分类</a></li>                    </ul>
+                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/news/') ?>"
+                               type="nav_head" rel="">新闻列表</a></li>
+                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/menus/') ?>"
+                               type="nav_foot" rel="">新闻分类</a></li>
+                    </ul>
                 </li>
             </ul>
-        </div><!--waiceng-->
-        <!--waiceng--><div title="帐号中心" data-options="iconCls:'icon-mini-add'" style="padding:10px;">
+        </div>
+        <!--waiceng-->
+        <!--waiceng-->
+        <div title="帐号中心" data-options="iconCls:'icon-mini-add'" style="padding:10px;">
             <ul class="easyui-tree" data-options="animate:true">
                 <li data-options="state:'closed'">
                     <span>用户管理</span>
                     <ul>
-                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/user/')?>" type="member_perinfo" rel="">用户列表</a></li>
+                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/user/') ?>"
+                               type="member_perinfo" rel="">用户列表</a></li>
+                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/user/password') ?>"
+                               type="member_perinfo" rel="">密码修改</a></li>
                 </li>
             </ul>
-        </div>           <!--//左侧菜单导航-->
-    </div><!--accordion-->
+        </div>
+        <!--//左侧菜单导航-->
+    </div>
+    <!--accordion-->
 
 </div>
 <!--west end-->
@@ -80,8 +95,8 @@
 <!--south end-->
 <!--center start -->
 <div data-options="region:'center'" class="indexcenter" title="欢迎使用浙江海洋学院校团委网站后台管理">
-    <div id="tabs_index" class="easyui-tabs"  fit="true" border="false"  >
-        <div title="首页" style="overflow:hidden; " >
+    <div id="tabs_index" class="easyui-tabs" fit="true" border="false">
+        <div title="首页" style="overflow:hidden; ">
             <div style="padding:10px;">
                 <table class="dir">
                     <tr>
@@ -92,36 +107,37 @@
                     <tr>
                         <td>PHP版本</td>
                         <td bgcolor="#60BF60">通过</td>
-                        <td>PHP 5.1.0或更高版本是必须的。 </td>
+                        <td>PHP 5.1.0或更高版本是必须的。</td>
                     </tr>
                     <tr>
-                        <td>DOM扩展模块  </td>
+                        <td>DOM扩展模块</td>
                         <td bgcolor="#60BF60">通过</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>PDO扩展模块  </td>
+                        <td>PDO扩展模块</td>
                         <td bgcolor="#60BF60">通过</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>PDO MySQL扩展模块 </td>
+                        <td>PDO MySQL扩展模块</td>
                         <td bgcolor="#60BF60">通过</td>
-                        <td>如果使用MySQL数据库，这是必须的。 </td>
+                        <td>如果使用MySQL数据库，这是必须的。</td>
                     </tr>
                     <tr>
-                        <td>Memcache扩展模块 </td>
+                        <td>Memcache扩展模块</td>
                         <td bgcolor="#60BF60">通过</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>SOAP扩展模块 </td>
+                        <td>SOAP扩展模块</td>
                         <td bgcolor="#60BF60">通过</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>GD extension with<br />
-                            FreeType support</td>
+                        <td>GD extension with<br/>
+                            FreeType support
+                        </td>
                         <td bgcolor="#60BF60">通过</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -129,10 +145,28 @@
 
             </div>
             <style>
-                .dir{ width:100%; border-left:#E2E2E2 solid 1px;border-top:#E2E2E2 solid 1px;border-collapse:collapse;}
-                .dir caption{ text-align:left; font-size:14px;}
-                .dir th{background-color:#E2E2E2;}
-                .dir td{border-right:#E2E2E2 solid 1px;border-bottom:#E2E2E2 solid 1px;vertical-align: top; padding:2px;}
+                .dir {
+                    width: 100%;
+                    border-left: #E2E2E2 solid 1px;
+                    border-top: #E2E2E2 solid 1px;
+                    border-collapse: collapse;
+                }
+
+                .dir caption {
+                    text-align: left;
+                    font-size: 14px;
+                }
+
+                .dir th {
+                    background-color: #E2E2E2;
+                }
+
+                .dir td {
+                    border-right: #E2E2E2 solid 1px;
+                    border-bottom: #E2E2E2 solid 1px;
+                    vertical-align: top;
+                    padding: 2px;
+                }
             </style>
 
         </div>
@@ -141,60 +175,66 @@
 </div>
 <!--center end -->
 
-<script type="text/javascript" src="<?php echo base_url();?>scripts/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>scripts/manage/common.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>scripts/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>scripts/easyui-lang-zh_CN.js"></script>
-<script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>scripts/ueditor/editor_config.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>scripts/ueditor/editor_all_min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>scripts/manage/common.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>scripts/easyui-lang-zh_CN.js"></script>
+<script src="<?php echo base_url(); ?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo base_url(); ?>scripts/ueditor/editor_config.js"></script>
+<script type="text/javascript" charset="utf-8"
+        src="<?php echo base_url(); ?>scripts/ueditor/editor_all_min.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/My97DatePicker/WdatePicker.js"></script>
+        src="<?php echo base_url(); ?>scripts/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url(); ?>scripts/manage/news/single.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/masterSlaveList.js"></script>
+        src="<?php echo base_url(); ?>scripts/manage/news/masterSlaveList.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/imageList.js"></script>
+        src="<?php echo base_url(); ?>scripts/manage/news/imageList.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/linkList.js"></script>
+        src="<?php echo base_url(); ?>scripts/manage/news/linkList.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/multiAttrList.js"></script>
+        src="<?php echo base_url(); ?>scripts/manage/news/multiAttrList.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/normalList.js"></script>
+        src="<?php echo base_url(); ?>scripts/manage/news/normalList.js"></script>
 <script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/videoList.js"></script>
-<script type="text/javascript" >
+        src="<?php echo base_url(); ?>scripts/manage/news/videoList.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url(); ?>scripts/manage/user/user.js"></script>
+<script type="text/javascript">
 
+    function userInfoFun() {
+        location.href=global._prefix + "/manage/login/logout"
+    }
+    $(function () {
 
-$(function(){
-    $('.sider li a').click(function(){
-        var classId = 'index';
-        var subtitle = $(this).text();
-        var url = $(this).attr('cmshref');
-        var rel = $(this).attr('rel');
-        //左侧直接打开弹窗sss
-        if(rel=='dialog'){
-            var type = $(this).attr('type');
-            //alert(type);
-            openDialog(type,url,subtitle);
-            return false;
-        }
-        //更新内容到右侧的tabs内容区
-        if(!$('#tabs_'+classId).tabs('exists',subtitle)){
-            $('#tabs_'+classId).tabs('add',{
-                title:subtitle,
-                content:subtitle,
-                closable:true,
-                href:url
-            });
-            return false;
-        }else{
-            $('#tabs_'+classId).tabs('select',subtitle);
-            return false;
-        }
+        $('.sider li a').click(function () {
+            var classId = 'index';
+            var subtitle = $(this).text();
+            var url = $(this).attr('cmshref');
+            var rel = $(this).attr('rel');
+            //左侧直接打开弹窗sss
+            if (rel == 'dialog') {
+                var type = $(this).attr('type');
+                //alert(type);
+                openDialog(type, url, subtitle);
+                return false;
+            }
+            //更新内容到右侧的tabs内容区
+            if (!$('#tabs_' + classId).tabs('exists', subtitle)) {
+                $('#tabs_' + classId).tabs('add', {
+                    title: subtitle,
+                    content: subtitle,
+                    closable: true,
+                    href: url
+                });
+                return false;
+            } else {
+                $('#tabs_' + classId).tabs('select', subtitle);
+                return false;
+            }
+        });
     });
-});
 
 
 </script>

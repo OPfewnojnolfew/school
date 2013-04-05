@@ -1,74 +1,53 @@
-<div class="pagecontent">
-    <table id="treegrid_newssort">
-    </table>
-    <script>
-        $(function(){
-            var classId = 'newssort';
-            var urljson = "<?php echo base_url('manage/user/userlist')?>";
-            var hrefadd = 'news/newssortadd.html';
-            var hrefedit = 'news/newssortadd.html';
-            var hrefcancel = '__APP__/NewsSort/delete';
-            var height = $('.indexcenter').height();
-            //openTreeGrid(classId,urljson,hrefadd,hrefedit,hrefcancel);
-            $('#treegrid_'+classId).datagrid({
-                url:urljson,
-                idField:'cat_id',
-                pagination:false,
-                fitColumns:true,
-                autoRowHeight:false,
-                height:height-50,
-                toolbar:[{
-                    id:'btnadd'+classId,
-                    text:'添加',
-                    iconCls:'icon-add',
-                    handler:function(){
-                        var title = '添加分类';
-                        admin_newscat_appendFun(classId,hrefadd,title);
-                    }
-                },'-',{
-                    id:'btnedit'+classId,
-                    text:'展开',
-                    iconCls:'icon-redo',
-                    handler: function() {
-                        var node = $('#treegrid_newssort').treegrid('getSelected');
-                        if (node) {
-                            $('#treegrid_newssort').treegrid('expandAll', node.cid);
-                        } else {
-                            $('#treegrid_newssort').treegrid('expandAll');
-                        }
-                    }
-                },'-',{
-                    id:'btnedit'+classId,
-                    text:'折叠',
-                    iconCls:'icon-undo',
-                    handler: function() {
-                        var node = $('#treegrid_newssort').treegrid('getSelected');
-                        if (node) {
-                            $('#treegrid_newssort').treegrid('collapseAll', node.cid);
-                        } else {
-                            $('#treegrid_newssort').treegrid('collapseAll');
-                        }
-                    }
-                },'-',{
-                    id:'btnedit'+classId,
-                    text:'刷新',
-                    iconCls:'icon-reload',
-                    handler: function() {
-                        $('#treegrid_newssort').treegrid('reload');
-                    }
-                }
-                ],
-                columns:[[
-                    {field:'account_id',title:'ID',width:20,align:'center'},
-                    {field:'username',title:'用户名',width:200},
-                    {field:'nickname',title:'昵称',width:50},
-                    {field:'login_time',title:'最近登录时间',width:50},
-                    {field:'login_ip',title:'IP',width:50},
-                    {field:'logincount',title:'登录次数',width:50}
-                ]]
-            })
-        })
+<script type="text/javascript">
+    $(function () {
+        var user = new User();
+        $("#userMDel").click(function () {
+            user.mDel()
+        });
+        $("#userAdd").click(function () {
+            user.add()
+        });
+    });
 
-    </script>
-
-</div><!--pagecontent-->
+</script>
+<div id="userSearchbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" id="userAdd">新增</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" id="userMDel">批量删除</a>
+</div>
+<table id="userList" toolbar="#userSearchbar"></table>
+<div id="userWin" class="easyui-dialog">
+    <div class="division">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="shopping_setting">
+            <tbody>
+            <tr>
+                <th>
+                    用户名：
+                </th>
+                <td>
+                    <input type="text" id="userUserName"
+                           class="easyui-validatebox easyui_form_input" style="width:240px;"
+                           data-options="required:true">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    昵称：
+                </th>
+                <td>
+                    <input type="text" id="userNickName"
+                           class="easyui-validatebox easyui_form_input" style="width:240px;">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    密码：
+                </th>
+                <td>
+                    <input type="password" id="userPassword"
+                           class="easyui-validatebox easyui_form_input" style="width:240px;">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
