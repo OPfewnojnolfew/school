@@ -1,8 +1,4 @@
 
-<script type="text/javascript"
-	src="<?php echo base_url();?>scripts/manage/news/videoList.js"></script>
-
-
 <script type="text/javascript">
     $(function() {
         var videoList=new VideoList("<?php echo $menuid?>");

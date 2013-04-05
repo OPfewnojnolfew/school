@@ -245,7 +245,7 @@ ImageList.prototype = {
     },
     init: function () {
         this.title = $("#imageListTitle" + this.menuid);
-        this.editor = UE.getEditor('imageListContent' + this.menuid);
+
 
         this.uploadImage = $('#file_upload' + this.menuid);
         this.viewImage = $('#imagePath' + this.menuid);
@@ -259,5 +259,6 @@ ImageList.prototype = {
         this.createTable();
         this.createDialog();
         this.upload();
+        this.editor = UE.getEditor('imageListContent' + this.menuid);
     }
 }

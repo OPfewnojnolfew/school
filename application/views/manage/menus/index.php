@@ -1,4 +1,5 @@
-﻿<script type="text/javascript">
+﻿<script type="text/javascript" src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>
+<script type="text/javascript">
     $(function(){
         var menu=new Menu();
         $("#menuAddRoot").click(function(){menu.add();});

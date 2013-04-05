@@ -1,8 +1,4 @@
 
-<script type="text/javascript"
-	src="<?php echo base_url();?>scripts/manage/news/imageList.js"></script>
-
-
 <script type="text/javascript">
     $(function() {
         var imageList=new ImageList("<?php echo $menuid?>");

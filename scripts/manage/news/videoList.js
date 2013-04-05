@@ -225,7 +225,7 @@ VideoList.prototype = {
     },
     init: function () {
         this.title = $("#videoListTitle" + this.menuid);
-        this.editor = UE.getEditor('videoListContent' + this.menuid);
+
         this.uploadVideo = $('#file_upload' + this.menuid);
 
         this.searchTitle = $("#title" + this.menuid);
@@ -238,5 +238,6 @@ VideoList.prototype = {
         this.createTable();
         this.createDialog();
         this.upload();
+        this.editor = UE.getEditor('videoListContent' + this.menuid);
     }
 }

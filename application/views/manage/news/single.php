@@ -1,5 +1,3 @@
-<!--<script type="text/javascript"-->
-<!--        src="--><?php //echo base_url(); ?><!--scripts/manage/news/single.js"></script>-->
 <script type="text/javascript">
     $(function () {
         var single = new Single("<?php echo $menuid?>");

@@ -2,15 +2,12 @@
 <html>
 <title>校团委后台管理</title>
 <head>
-    <style type="text/css">
-    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/easyuithemes/icon.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/easyuithemes/gray/easyui.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/common.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>themes/manage/style.css" />
-    <link rel="stylesheet" href="<?php echo base_url();?>themes/kindeditor/themes/default/default.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>scripts/uploadify/uploadify.css">
 </head>
 <body class="easyui-layout">
@@ -59,34 +56,7 @@
                 </li>
             </ul>
         </div><!--waiceng-->
-        <div title="客服中心" data-options="iconCls:'icon-mini-add'" style="padding:10px;">
-            <ul class="easyui-tree" data-options="animate:true">
-                <li data-options="state:'closed'">
-                    <span>文档管理</span>
-                    <ul>
-                        <li><a href="javascript:viod(0);" cmshref="/admin.php/News/index" type="news_list" rel="">文档列表</a></li><li><a href="javascript:viod(0);" cmshref="/admin.php/News/index" type="news_list_add" rel="">添加文档</a></li><li><a href="javascript:viod(0);" cmshref="/admin.php/News/recycle" type="news_recycle" rel="">文档回收站</a></li>                    </ul>
-                </li><li data-options="state:'closed'">
-                    <span>分类管理</span>
-                    <ul>
-                        <li><a href="javascript:viod(0);" cmshref="/admin.php/NewsSort/index" type="sort_list" rel="">分类列表</a></li><li><a href="javascript:viod(0);" cmshref="/admin.php/NewsSort/add" type="newssort" rel="dialog">添加分类</a></li>                    </ul>
-                </li><li data-options="state:'closed'">
-                    <span>留言管理</span>
-                    <ul>
-                        <li><a href="javascript:viod(0);" cmshref="/admin.php/Message/index" type="message_list" rel="">留言信息</a></li><li><a href="javascript:viod(0);" cmshref="/admin.php/Message/sort" type="message_setting" rel="">留言分类</a></li>                    </ul>
-                </li><li data-options="state:'closed'">
-                    <span>评论管理</span>
-                    <ul>
-                        <li><a href="javascript:viod(0);" cmshref="/admin.php/Comment/index" type="comment_list" rel="">评论信息</a></li>                    </ul>
-                </li><li data-options="state:'closed'">
-                    <span>单页管理</span>
-                    <ul>
-                        <li><a href="javascript:viod(0);" cmshref="/admin.php/Pages/index" type="singlepage_list" rel="">单页文档</a></li><li><a href="javascript:viod(0);" cmshref="/admin.php/Pages/sort" type="singlepage_sort" rel="">单页分类</a></li>                    </ul>
-                </li><li data-options="state:'closed'">
-                    <span>碎片文档</span>
-                    <ul>
-                        <li><a href="javascript:viod(0);" cmshref="/admin.php/Block/index" type="block_list" rel="">碎片列表</a></li><li><a href="javascript:viod(0);" cmshref="/admin.php/Block/sort" type="block_cat" rel="">碎片分类</a></li>                    </ul>
-                </li>        </ul>
-        </div><!--waiceng--><div title="帐号中心" data-options="iconCls:'icon-mini-add'" style="padding:10px;">
+        <!--waiceng--><div title="帐号中心" data-options="iconCls:'icon-mini-add'" style="padding:10px;">
             <ul class="easyui-tree" data-options="animate:true">
                 <li data-options="state:'closed'">
                     <span>用户管理</span>
@@ -112,6 +82,59 @@
 <div data-options="region:'center'" class="indexcenter" title="欢迎使用浙江海洋学院校团委网站后台管理">
     <div id="tabs_index" class="easyui-tabs"  fit="true" border="false"  >
         <div title="首页" style="overflow:hidden; " >
+            <div style="padding:10px;">
+                <table class="dir">
+                    <tr>
+                        <th width="80">项目名称</th>
+                        <th width="20">结果</th>
+                        <th width="220">备注</th>
+                    </tr>
+                    <tr>
+                        <td>PHP版本</td>
+                        <td bgcolor="#60BF60">通过</td>
+                        <td>PHP 5.1.0或更高版本是必须的。 </td>
+                    </tr>
+                    <tr>
+                        <td>DOM扩展模块  </td>
+                        <td bgcolor="#60BF60">通过</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>PDO扩展模块  </td>
+                        <td bgcolor="#60BF60">通过</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>PDO MySQL扩展模块 </td>
+                        <td bgcolor="#60BF60">通过</td>
+                        <td>如果使用MySQL数据库，这是必须的。 </td>
+                    </tr>
+                    <tr>
+                        <td>Memcache扩展模块 </td>
+                        <td bgcolor="#60BF60">通过</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>SOAP扩展模块 </td>
+                        <td bgcolor="#60BF60">通过</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>GD extension with<br />
+                            FreeType support</td>
+                        <td bgcolor="#60BF60">通过</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+
+            </div>
+            <style>
+                .dir{ width:100%; border-left:#E2E2E2 solid 1px;border-top:#E2E2E2 solid 1px;border-collapse:collapse;}
+                .dir caption{ text-align:left; font-size:14px;}
+                .dir th{background-color:#E2E2E2;}
+                .dir td{border-right:#E2E2E2 solid 1px;border-bottom:#E2E2E2 solid 1px;vertical-align: top; padding:2px;}
+            </style>
+
         </div>
     </div>
 
@@ -131,8 +154,18 @@
         src="<?php echo base_url(); ?>scripts/manage/news/single.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url();?>scripts/manage/news/masterSlaveList.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/imageList.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/linkList.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/multiAttrList.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/normalList.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url();?>scripts/manage/news/videoList.js"></script>
 <script type="text/javascript" >
+
 
 $(function(){
     $('.sider li a').click(function(){

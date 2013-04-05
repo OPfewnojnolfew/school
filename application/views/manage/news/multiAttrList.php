@@ -1,5 +1,4 @@
-<script type="text/javascript"
-        src="<?php echo base_url();?>scripts/manage/news/multiAttrList.js"></script>
+
 
 <script type="text/javascript">
     $(function() {

@@ -238,7 +238,6 @@ MasterSlaveList.prototype = {
     },
     init: function () {
         this.title = $("#masterSlaveListTitle" + this.menuid);
-        this.editor = UE.getEditor('masterSlaveListContent' + this.menuid);
 
         this.uploadImage = $('#file_upload' + this.menuid);
         this.viewImage = $('#masterSlavePath' + this.menuid);
@@ -249,5 +248,6 @@ MasterSlaveList.prototype = {
         this.createTable();
         this.createDialog();
         this.upload();
+        this.editor = UE.getEditor('masterSlaveListContent' + this.menuid);
     }
 }

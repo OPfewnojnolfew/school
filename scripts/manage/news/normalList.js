@@ -159,7 +159,6 @@ NormalList.prototype={
     },
     init:function(){
         this.title = $("#normalListTitle" + this.menuid);
-        this.editor = UE.getEditor('normalListContent'+this.menuid);
 
         this.searchTitle = $("#title" + this.menuid);
         this.searchBegin = $("#begin" + this.menuid);
@@ -168,6 +167,7 @@ NormalList.prototype={
         this.dialog = $('#normalListWin' + this.menuid);
         this.createTable();
         this.createDialog();
+        this.editor = UE.getEditor('normalListContent'+this.menuid);
 //        this.editor=  KindEditor.create("#normalListContent"+this.menuid, {
 //            resizeType : 1,
 //            allowPreviewEmoticons : false,

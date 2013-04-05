@@ -226,7 +226,7 @@ MultiAttrList.prototype = {
     },
     init: function () {
         this.title = $("#multiAttrListTitle" + this.menuid);
-        this.editor = UE.getEditor('multiAttrListContent' + this.menuid);
+
         this.uploadFile = $('#file_upload' + this.menuid);
 
         this.searchTitle = $("#title" + this.menuid);
@@ -239,6 +239,7 @@ MultiAttrList.prototype = {
         this.createTable();
         this.createDialog();
         this.upload();
+        this.editor = UE.getEditor('multiAttrListContent' + this.menuid);
     },
     additionAttachment: function (attr) {
         var _this = this;
