@@ -24,7 +24,7 @@
                     $('.layout_'+classId).css('height',height-30);
                     $('.tree_'+classId).tree({
                         onClick:function(node){
-                            if(!$('.tree_'+classId).tree('isLeaf',node.target)){
+                            if(!$(this).tree('isLeaf',node.target)){
                                 return;
                             }
                             var nid = node.id;

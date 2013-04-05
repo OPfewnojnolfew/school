@@ -122,8 +122,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>scripts/manage/common.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>scripts/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>scripts/easyui-lang-zh_CN.js"></script>
-<script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="<?php echo base_url();?>themes/kindeditor/zh_CN.js"></script>
 <script src="<?php echo base_url();?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>scripts/ueditor/editor_config.js"></script>
 <script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>scripts/ueditor/editor_all_min.js"></script>
@@ -133,6 +131,7 @@
         src="<?php echo base_url(); ?>scripts/manage/news/single.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url();?>scripts/manage/news/masterSlaveList.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>scripts/manage/menus/menusIndex.js"></script>
 <script type="text/javascript" >
 
 $(function(){
