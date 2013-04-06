@@ -1,0 +1,22 @@
+.xiaoyuanwh {
+	position:relative;
+	padding:0px;
+	clear:both;
+	height:290px;
+	width:344px;
+	margin:0 auto;
+}
+#ifocus { width:304px; height:212px; margin:0px 0px 5px 0px; border:1px solid #FBD9A5;padding:2px 0px; position:absolute; top:0px; left:20px;}
+	#ifocus_pic { display:inline; position:relative; float:left; width:302px; height:210px; overflow:hidden; margin:0; padding:0;}
+		#ifocus_piclist { position:absolute;}
+		#ifocus_piclist ul{ padding:0; margin:0;}
+		#ifocus_piclist li { width:300px; height:210px; overflow:hidden;}
+		#ifocus_piclist img { width:300px; height:210px;}
+	#ifocus_btn {width:298px!important width:304px; position:absolute; margin:0 auto; background-color:#fbd9a5; left:20px; top:221px; height:65px; padding-left:7px!important padding-left:1px ;}
+		#ifocus_btn li { width:84px; height:55px; float:left;cursor:pointer; opacity:0.5; -moz-opacity:0.5; filter:alpha(opacity=50); margin:3px 4px 3px 5px;}
+		#ifocus_btn img {width:84px; height:55px; float:left;}
+		#ifocus_btn .current { border:#FF0000 2px solid;padding:0px;opacity:1; -moz-opacity:1; filter:alpha(opacity=100);}
+		#ifocus_btn .normal { border:#CCCCCC 2px solid;padding:0px;opacity:1; -moz-opacity:1; filter:alpha(opacity=80); }
+	#ifocus_opdiv { position:absolute; left:0; bottom:0; width:410px; height:0px; background:#fff; opacity:0.5; -moz-opacity:0.5; filter:alpha(opacity=80); }
+	#ifocus_tx { position:absolute; left:5px; bottom:0; color:#666666; }
+		#ifocus_tx .normal { display:none;}
