@@ -62,6 +62,13 @@
                                type="nav_foot" rel="">新闻分类</a></li>
                     </ul>
                 </li>
+                <li data-options="state:'open'">
+                    <span>友情链接</span>
+                    <ul>
+                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/link/index') ?>"
+                               type="nav_head" rel="">友情链接</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!--waiceng-->
@@ -185,6 +192,8 @@
         src="<?php echo base_url(); ?>scripts/ueditor/editor_all_min.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url(); ?>scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url(); ?>scripts/manage/link/friendlinkList.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url(); ?>scripts/manage/news/single.js"></script>
 <script type="text/javascript"
