@@ -16,7 +16,7 @@ class link extends MY_Controller
     public function initData()
     {
         $array = array(
-            'name' => $this->input->post('title'),
+            'name' => $this->input->post('name'),
             'begin' => $this->input->post('begin'),
             'end' => $this->input->post('end'),
             'page' => $this->input->post('page'),

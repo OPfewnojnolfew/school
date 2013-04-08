@@ -41,7 +41,7 @@ FriendlinkList.prototype = {
                         field: 'imagepath',
                         formatter: function (value, rowData) {
                             if (value !== "") {
-                                return "<img src='" + global._prefix + "/" + value+ "' width='50' heigt='50'>";
+                                return "<img src='" + global._prefix + "/" + value + "' width='50' heigt='50'>";
                             }
                             else {
                                 return "";
@@ -140,7 +140,7 @@ FriendlinkList.prototype = {
                             name: title,
                             linkurl: url,
                             priority: priority,
-                            type:  _this.type.combobox("getValue"),
+                            type: _this.type.combobox("getValue"),
                             imagepath: _this.attachmentPath
                         }
                         $.post(global._prefix + "/manage/link/addOrEditLinkList", postData, function (res) {
@@ -164,9 +164,9 @@ FriendlinkList.prototype = {
         });
     },
     createType: function () {
-        var _this=this;
+        var _this = this;
         this.type.combobox({
-            panelHeight:100,
+            panelHeight: 100,
             onSelect: function (record) {
                 if (record.value == "1") {
                     _this.viewImage.parent().parent().removeAttr("style");
@@ -254,11 +254,13 @@ FriendlinkList.prototype = {
         this.title.val(selectedNode.name);
         this.url.val(selectedNode.linkurl);
         this.priority.val(selectedNode.priority);
-        this.type.combobox("setValue",selectedNode.type);
-        if (selectedNode.attachmentID !== null && this.type.combobox("getValue") == "1") {
+        this.type.combobox("setValue", selectedNode.type);
+        if (this.type.combobox("getValue") == "1") {
             this.viewImage.parent().parent().removeAttr("style");
             this.attachmentPath = selectedNode.imagepath;
-            this.viewImage.html("<img src='" + global._prefix + "/" + selectedNode.imagepath + "'>");
+            if (selectedNode.imagepath !== "") {
+                this.viewImage.html("<img src='" + global._prefix + "/" + selectedNode.imagepath + "'>");
+            }
         }
         this.dialog.window("open");
     },
@@ -267,9 +269,9 @@ FriendlinkList.prototype = {
         this.title.val("");
         this.url.val("");
         this.priority.val("");
-        this.viewImage.html("");
-        this.type.combobox("setValue","0");
+        this.type.combobox("setValue", "0");
         this.attachmentPath = "";
+        this.viewImage.html("");
         this.viewImage.parent().parent().css("display", "none");
     },
     init: function () {
