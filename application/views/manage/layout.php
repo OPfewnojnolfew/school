@@ -176,7 +176,13 @@
 <!--center end -->
 
 <script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>scripts/manage/common.js"></script>
+<script type="text/javascript">
+        var global = {
+    _prefix : "<?php echo base_url(); ?>",
+    _baseUrl:"/manage/news",
+    _tabIdPrefix:"tabmemu"
+    }
+</script>
 <script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>scripts/easyui-lang-zh_CN.js"></script>
 <script src="<?php echo base_url(); ?>scripts/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>

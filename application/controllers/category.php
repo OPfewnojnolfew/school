@@ -9,6 +9,7 @@ class category extends CI_Controller
     {
         parent::__construct();
         $this->load->model('mod_category', 'model');
+        $this->load->model('mod_news', 'news');
     }
 
     public function index($cateid='')
@@ -21,6 +22,6 @@ class category extends CI_Controller
             'menus' => $menus,
             'cate'  => $cateInfo
         );
-        $this->load->view('introduction', $data);
+        $this->load->view($cateInfo['tem'], $data);
     }
 }
