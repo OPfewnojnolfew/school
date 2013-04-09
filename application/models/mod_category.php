@@ -9,6 +9,9 @@ class mod_category extends MY_Model
     {
         $menu = $this->getMenus();
         $cateInfo = $this->db->get_where('menus', array('id' => $cateid))->first_row('array');
+
+
+
         if (!$cateInfo) exit;
         $result['info'][] = $cateInfo;
         if ($cateInfo['pid'] == 0) {
@@ -18,6 +21,9 @@ class mod_category extends MY_Model
                     break;
                 }
             }
+            $result['info'][] =  $result['cate']['children'][0];
+            $result['tem'] = $this->checkTem($result['cate']['children'][0]['type']);
+            $result['list'] = $this->getList($result['cate']['children'][0]['type'], $result['cate']['children'][0]['id']);
         } else {
             $this->getParent($cateInfo['id'], $result);
             foreach ($menu as $row) {
