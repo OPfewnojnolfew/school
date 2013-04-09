@@ -18,31 +18,8 @@
         [<strong></strong>]，欢迎你！您使用[<strong>123.232.103.195</strong>]IP登录！
     </div>
     <div style="position: absolute; right: 0px; bottom: 0px; ">
-        <a href="javascript:void(0);" class="easyui-menubutton"
-           data-options="menu:'#layout_north_pfMenu',iconCls:'icon-ok'">更换皮肤</a> <a href="javascript:void(0);"
-                                                                                    class="easyui-menubutton"
-                                                                                    data-options="menu:'#layout_north_kzmbMenu',iconCls:'icon-help'">控制面板</a>
-        <a href="javascript:void(0);" class="easyui-menubutton"
+        <a href="javascript:void(0);" class="easyui-menubutton" onclick="userInfoFun()"
            data-options="menu:'#layout_north_zxMenu',iconCls:'icon-back'">注销</a>
-    </div>
-    <div id="layout_north_pfMenu" style="width: 120px; display: none;">
-        <div onclick="changeTheme('default');">default</div>
-        <div onclick="changeTheme('gray');">gray</div>
-        <div onclick="changeTheme('metro');">metro</div>
-        <div onclick="changeTheme('cupertino');">cupertino</div>
-        <div onclick="changeTheme('dark-hive');">dark-hive</div>
-        <div onclick="changeTheme('pepper-grinder');">pepper-grinder</div>
-        <div onclick="changeTheme('sunny');">sunny</div>
-    </div>
-    <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
-        <div onclick="userInfoFun();">个人信息</div>
-        <div onclick="userInfoFun();">退出登录</div>
-    </div>
-    <div id="layout_north_zxMenu" style="width: 100px; display: none;">
-        <div onclick="logoutFun();">锁定窗口</div>
-        <div class="menu-sep"></div>
-        <div onclick="logoutFun();">重新登录</div>
-        <div onclick="logoutFun(true);">退出系统</div>
     </div>
 </div>
 <!--north end-->
@@ -60,6 +37,13 @@
                                type="nav_head" rel="">新闻列表</a></li>
                         <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/menus/') ?>"
                                type="nav_foot" rel="">新闻分类</a></li>
+                    </ul>
+                </li>
+                <li data-options="state:'open'">
+                    <span>友情链接</span>
+                    <ul>
+                        <li><a href="javascript:viod(0);" cmshref="<?php echo base_url('/manage/link/index') ?>"
+                               type="nav_head" rel="">友情链接</a></li>
                     </ul>
                 </li>
             </ul>
@@ -191,6 +175,8 @@
         src="<?php echo base_url(); ?>scripts/ueditor/editor_all_min.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url(); ?>scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"
+        src="<?php echo base_url(); ?>scripts/manage/link/friendlinkList.js"></script>
 <script type="text/javascript"
         src="<?php echo base_url(); ?>scripts/manage/news/single.js"></script>
 <script type="text/javascript"

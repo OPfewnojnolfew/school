@@ -21,7 +21,7 @@ LinkList.prototype = {
             idField: 'id',
             pagination: true,
             sortName: 'createtime',
-            sortOrder:"desc",
+            sortOrder: "desc",
             fitColumns: true,
             url: global._prefix + "/manage/news/initData",
             queryParams: {menuid: _this.menuid},
@@ -167,8 +167,8 @@ LinkList.prototype = {
         this.dialog.window("open");
     },
     clear: function () {
-        this.id = "",
-            this.title.val("");
+        this.id = "";
+        this.title.val("");
         this.url.val("");
     },
     init: function () {
