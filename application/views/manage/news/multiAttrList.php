@@ -8,6 +8,7 @@
         $("#mDel<?php echo $menuid?>").click(function(){multiAttrList.mDel()});
         $("#add<?php echo $menuid?>").click(function(){multiAttrList.add()});
         $("#edit<?php echo $menuid?>").click(function(){multiAttrList.edit()});
+        $("#tabs_newslist").tabs("getSelected").data("newObj",multiAttrList);
     });
 
 </script>

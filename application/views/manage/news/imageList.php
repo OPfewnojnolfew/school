@@ -7,6 +7,7 @@
         $("#mDel<?php echo $menuid?>").click(function(){imageList.mDel()});
         $("#add<?php echo $menuid?>").click(function(){imageList.add()});
         $("#edit<?php echo $menuid?>").click(function(){imageList.edit()});
+        $("#tabs_newslist").tabs("getSelected").data("newObj",imageList);
     });
 
 </script>

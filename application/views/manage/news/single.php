@@ -4,6 +4,7 @@
         $("#Save<?php echo $menuid ?>").click(function () {
             single.save()
         });
+        $("#tabs_newslist").tabs("getSelected").data("newObj",single);
     })
 </script>
 <div class="division">

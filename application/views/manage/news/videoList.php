@@ -7,6 +7,7 @@
         $("#mDel<?php echo $menuid?>").click(function(){videoList.mDel()});
         $("#add<?php echo $menuid?>").click(function(){videoList.add()});
         $("#edit<?php echo $menuid?>").click(function(){videoList.edit()});
+        $("#tabs_newslist").tabs("getSelected").data("newObj",videoList);
     });
 
 </script>

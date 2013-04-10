@@ -6,6 +6,7 @@
         $("#add<?php echo $menuid?>").click(function(){masterSlaveList.add()});
         $("#addNext<?php echo $menuid?>").click(function(){masterSlaveList.addNext()});
         $("#edit<?php echo $menuid?>").click(function(){masterSlaveList.edit()});
+        $("#tabs_newslist").tabs("getSelected").data("newObj",masterSlaveList);
     });
 
 </script>

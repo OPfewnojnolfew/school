@@ -14,6 +14,7 @@
         $("#edit<?php echo $menuid?>").click(function () {
             normalList.edit()
         });
+        $("#tabs_newslist").tabs("getSelected").data("newObj",normalList);
     });
 
 </script>
