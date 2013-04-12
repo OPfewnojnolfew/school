@@ -23,7 +23,7 @@ class News extends MY_Controller
                 $this->load->view('manage/news/single', $data);
                 break;
             case 2:
-                $this->load->view('manage/news/normalList', $data);
+                $this->load->view('manage/news/imageList', $data);
                 break;
             case 3:
                 $this->load->view('manage/news/imageList', $data);
