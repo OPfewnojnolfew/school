@@ -35,11 +35,11 @@
         //为编辑器实例添加一个路径，这个不能被注释
         UEDITOR_HOME_URL : URL
         //图片上传配置区
-        //,imageUrl:URL+"php/imageUp.php"             //图片上传提交地址
-        //,imagePath:URL + "php/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
+        ,imageUrl:global._prefix+"/manage/uploadify/ueditorUpload"            //图片上传提交地址
+        ,imagePath:global._prefix+"/"                    //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
        //,imageFieldName:"upfile"                   //图片数据的key,若此处修改，需要在后台对应文件修改对应参数
-        //,compressSide:0                            //等比压缩的基准，确定maxImageSideLength参数的参照对象。0为按照最长边，1为按照宽度，2为按照高度
-        //,maxImageSideLength:900                    //上传图片最大允许的边长，超过会自动等比缩放,不缩放就设置一个比较大的值，更多设置在image.html中
+       // ,compressSide:0                            //等比压缩的基准，确定maxImageSideLength参数的参照对象。0为按照最长边，1为按照宽度，2为按照高度
+       // ,maxImageSideLength:900                    //上传图片最大允许的边长，超过会自动等比缩放,不缩放就设置一个比较大的值，更多设置在image.html中
 
         //涂鸦图片配置区
         //,scrawlUrl:URL+"php/scrawlUp.php"           //涂鸦上传地址
@@ -79,7 +79,7 @@
        // ,getMovieUrl:URL+"php/getMovie.php"                   //视频数据获取地址
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
-        ,toolbars:[["fullscreen","source","undo","redo","insertunorderedlist","insertorderedlist","link","unlink","separate","fontfamily","fontsize","bold","italic","underline","strikethrough","forecolor","backcolor","superscript","subscript","justifyleft","justifycenter","justifyright","justifyjustify","pasteplain","wordimage"]]
+        ,toolbars:[["fullscreen","source","undo","redo","insertunorderedlist","insertorderedlist","link","unlink","separate","fontfamily","fontsize","bold","italic","underline","strikethrough","forecolor","backcolor","superscript","subscript","justifyleft","justifycenter","justifyright","justifyjustify","pasteplain","wordimage","insertimage","insertvideo","attachment"]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         ,labelMap:{
             'anchor':'', 'undo':''
