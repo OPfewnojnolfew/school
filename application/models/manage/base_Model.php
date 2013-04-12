@@ -26,9 +26,9 @@ class Base_model extends CI_Model {
     private function menuTree(&$menu,&$menus){
         foreach($menus as &$val){
             if($val["pid"]==$menu["id"]){
-                array_push($menu["children"],$val);
                 //print_r(json_encode($menus)); return;
                 $this->menuTree($val,$menus);
+                array_push($menu["children"],$val);
             }
         }
     }
