@@ -161,10 +161,10 @@
 
 <script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
-        var global = {
-    _prefix : "<?php echo base_url(); ?>",
-    _baseUrl:"/manage/news",
-    _tabIdPrefix:"tabmemu"
+    var global = {
+        _prefix: "<?php echo base_url(); ?>",
+        _baseUrl: "/manage/news",
+        _tabIdPrefix: "tabmemu"
     }
 </script>
 <script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery.easyui.min.js"></script>
@@ -196,10 +196,21 @@
 <script type="text/javascript">
 
     function userInfoFun() {
-        location.href=global._prefix + "/manage/login/logout"
+        location.href = global._prefix + "/manage/login/logout"
     }
     $(function () {
-
+        $('#tabs_index').tabs({
+            onBeforeClose: function (which) {
+                //清理editor
+                var newobjs = $('#tabs_newslist').tabs("tabs");
+                $.each(newobjs,function(){
+                    var newobj = $(this).data("newObj");
+                    if (newobj && newobj.editor) {
+                        newobj.editor.destroy();
+                    }
+                })
+            }
+        });
         $('.sider li a').click(function () {
             var classId = 'index';
             var subtitle = $(this).text();
