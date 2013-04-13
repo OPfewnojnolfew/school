@@ -46,8 +46,8 @@
         //,scrawlPath:URL+"php/"                            //图片修正地址，同imagePath
 
         //附件上传配置区
-       // ,fileUrl:URL+"php/fileUp.php"               //附件上传提交地址
-       // ,filePath:URL + "php/"                   //附件修正地址，同imagePath
+        ,fileUrl:global._prefix+"/manage/uploadify/ueditorUploadFile"               //附件上传提交地址
+        ,filePath:global._prefix+"/"                  //附件修正地址，同imagePath
         //,fileFieldName:"upfile"                    //附件提交的表单名，若此处修改，需要在后台对应文件修改对应参数
          //远程抓取配置区
         //,catchRemoteImageEnable:true               //是否开启远程图片抓取,默认开启
@@ -111,7 +111,7 @@
 
         ,initialContent:''    //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
 
-        ,initialFrameWidth:750  //初始化编辑器宽度,默认1000
+        ,initialFrameWidth:830  //初始化编辑器宽度,默认1000
         //,initialFrameHeight:320  //初始化编辑器高度,默认320
 
         //,autoClearinitialContent:true //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
