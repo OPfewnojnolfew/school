@@ -71,7 +71,7 @@ NormalList.prototype={
         var _this=this;
         this.dialog.dialog({
             title:"",
-            width:900,
+            width:950,
             height:550,
             modal : true,
             resizable:true,
