@@ -26,6 +26,7 @@ MultiAttrList.prototype = {
             sortName: 'createtime',
             sortOrder:'desc',
             fitColumns: true,
+            height:'600',
             url: global._prefix + "/manage/news/initData",
             queryParams: {menuid: _this.menuid},
             frozenColumns: [
@@ -66,6 +67,21 @@ MultiAttrList.prototype = {
             },
             onClickRow: function (rowIndex) {
                 $(this).datagrid("unselectRow", rowIndex);
+            },
+            onDblClickRow: function (rowIndex, rowData) {
+                _this.clear();
+                _this.id=rowData.id;
+                _this.title.val(rowData.title);
+                _this.editor.setContent(rowData.content,false);
+                $.post(global._prefix + "/manage/uploadify/getMultiAttachment", {newsid: rowData.id}, function (res) {
+                    res = eval("(" + res + ")");
+                    if (res.type === "1") {
+                        for (var i = 0; i < res.attachment.length; i++) {
+                            _this.additionAttachment(res.attachment[i]);
+                        }
+                    }
+                });
+                _this.dialog.window("open");
             }
         });
     },

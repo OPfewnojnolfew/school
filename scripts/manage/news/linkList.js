@@ -23,6 +23,7 @@ LinkList.prototype = {
             sortName: 'createtime',
             sortOrder: "desc",
             fitColumns: true,
+            height:'600',
             url: global._prefix + "/manage/news/initData",
             queryParams: {menuid: _this.menuid},
             frozenColumns: [
@@ -62,6 +63,12 @@ LinkList.prototype = {
             },
             onClickRow: function (rowIndex) {
                 $(this).datagrid("unselectRow", rowIndex);
+            },
+            onDblClickRow: function (rowIndex, rowData) {
+                _this.id = rowData.id;
+                _this.title.val(rowData.title);
+                _this.url.val(rowData.linkurl);
+                _this.dialog.window("open");
             }
         });
     },

@@ -28,6 +28,7 @@ MasterSlaveList.prototype = {
             sortName: 'createtime',
             sortOrder: 'desc',
             fitColumns: true,
+            height:'600',
             url: global._prefix + "/manage/news/initDataTree",
             queryParams: {menuid: _this.menuid},
             frozenColumns: [
@@ -66,6 +67,20 @@ MasterSlaveList.prototype = {
             },
             onClickRow: function (rowIndex) {
                 $(this).treegrid("unselectRow", rowIndex);
+            },
+            onDblClickRow: function (row) {
+                _this.clear();
+                _this.pid = row.pid;
+                _this.id = row.id;
+                _this.title.val(row.title);
+                _this.editor.setContent(row.content, false);
+                if (row.attachmentID !== null) {
+                    _this.attachmentPath = row.attachmentPath ? row.attachmentPath : "";
+                    _this.attachmentID = row.attachmentID ? row.attachmentID : "";
+                    _this.attachmentName = row.attachmentName ? row.attachmentName : "";
+                    _this.viewImage.html("<img src='" + global._prefix + "/" + row.attachmentPath + "' alt='" + row.attachmentName + "'>");
+                }
+                _this.dialog.window("open");
             }
         });
     },

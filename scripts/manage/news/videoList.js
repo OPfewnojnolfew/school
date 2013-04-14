@@ -31,6 +31,7 @@ VideoList.prototype = {
             sortName: 'createtime',
             sortOrder: 'desc',
             fitColumns: true,
+            height:'600',
             url: global._prefix + "/manage/news/initDataImageOrVideo",
             queryParams: {menuid: _this.menuid},
             columns: [

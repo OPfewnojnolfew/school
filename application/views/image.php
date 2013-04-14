@@ -26,16 +26,16 @@
                                             <?php if ($cate['list']):?>
                                             <table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:30px">
                                                 <tbody><tr>
-                                                    <td width="280" valign="top"><a href="<? echo base_url('view/' . $cate['list'][0]['menuid'] . '/' . $cate['list'][0]['id']);?>">
+                                                    <td width="280" valign="top"><a href="<? echo base_url('view/index/' . $cate['list'][0]['menuid'] . '/' . $cate['list'][0]['id']);?>">
                                                             <img src="<? echo base_url( $cate['list'][0]['attachmentPath'] );?>" width="280" border="0" style="border:1px solid #CCCCCC; padding:1px;"></a></td>
                                                     <td width="718" align="left" valign="top" style="padding-left:15px; padding-right:15px;">
-                                                        <a href="<? echo base_url('view/' . $cate['list'][0]['menuid'] . '/' . $cate['list'][0]['id']);?>" title="<? echo $cate['list'][0]['title'] ;?>" target="_blank" style="font-size:14px; color:#8f1124; text-decoration:none; padding-bottom:10px; line-height:20px;"><strong><? echo $cate['list'][0]['title'] ;?></strong></a>
+                                                        <a href="<? echo base_url('view/index/' . $cate['list'][0]['menuid'] . '/' . $cate['list'][0]['id']);?>" title="<? echo $cate['list'][0]['title'] ;?>" target="_blank" style="font-size:14px; color:#8f1124; text-decoration:none; padding-bottom:10px; line-height:20px;"><strong><? echo $cate['list'][0]['title'] ;?></strong></a>
                                                         <br>
                                                         <span>发布日期：<? echo date("Y-m-d", strtotime($cate['list'][0]['createtime'] ));?></span>
                                                         <br>
                                                         <p style="margin:7px 0px 0px 0px; line-height:20px;">
                                                             <?php echo  utf8Substr(strip_tags($cate['list'][0]['content']), 0, 150); ?>
-                                                            <a href="<? echo base_url('view/' . $cate['list'][0]['menuid'] . '/' . $cate['list'][0]['id']);?>" class="xx" target="_blank">[详细]</a></p> </td>
+                                                            <a href="<? echo base_url('view/index/' . $cate['list'][0]['menuid'] . '/' . $cate['list'][0]['id']);?>" class="xx" target="_blank">[详细]</a></p> </td>
                                                 </tr>
 
                                                 <tr>
@@ -48,16 +48,16 @@
                                                 <?php foreach($cate['list'] as $key=>$val) :if($key>0):?>
                                                 <tr>
                                                     <td width="184" valign="top">
-                                                        <a href="<? echo base_url('view/' . $val['menuid'] . '/' . $val['id']);?>">
+                                                        <a href="<? echo base_url('view/index/' . $val['menuid'] . '/' . $val['id']);?>">
                                                             <img src="<? echo base_url( $val['attachmentPath'] );?>" width="180" height="135" border="0" style="border:1px solid #CCCCCC; padding:1px;"></a>
                                                     </td><td width="718" align="left" valign="top" style="padding-left:15px;padding-right:15px;">
-                                                        <a href="<? echo base_url('view/' . $val['menuid'] . '/' . $val['id']);?>" title="<? echo $val['title'] ;?>" target="_blank" style="font-size:14px; color:#8f1124; text-decoration:none; padding-bottom:10px; line-height:20px;"><strong><? echo $val['title'] ;?></strong></a>
+                                                        <a href="<? echo base_url('view/index/' . $val['menuid'] . '/' . $val['id']);?>" title="<? echo $val['title'] ;?>" target="_blank" style="font-size:14px; color:#8f1124; text-decoration:none; padding-bottom:10px; line-height:20px;"><strong><? echo $val['title'] ;?></strong></a>
                                                         <br>
                                                         <span>发布日期：<? echo date("Y-m-d", strtotime($cate['list'][0]['createtime'] ));?></span>
                                                         <br>
                                                         <p style="margin:7px 0px 0px 0px; line-height:20px;">
                                                             <?php echo  utf8Substr(strip_tags($val['content']), 0, 150); ?>
-                                                            <a href="<? echo base_url('view/' . $val['menuid'] . '/' . $val['id']);?>" class="xx" target="_blank">[详细]</a></p> </td>
+                                                            <a href="<? echo base_url('view/index/' . $val['menuid'] . '/' . $val['id']);?>" class="xx" target="_blank">[详细]</a></p> </td>
                                                 </tr>
 
                                                 <tr>

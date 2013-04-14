@@ -37,16 +37,16 @@ Menu.prototype = {
                                     return "简介";
                                 case "2":
                                     return "一般列表";
-                                case "4":
-                                    return "链接列表";
+//                                case "4":
+//                                    return "链接列表";
                                 case "3":
                                     return "图片列表";
-                                case "5":
-                                    return "附件列表";
+//                                case "5":
+//                                    return "附件列表";
                                 case "6":
                                     return "主从列表";
-                                case "7":
-                                    return "视频列表";
+//                                case "7":
+//                                    return "视频列表";
                                 default:
                                     return "";
                             }

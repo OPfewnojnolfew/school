@@ -258,9 +258,9 @@
         content.innerHTML=panels[i].innerHTML;
         for(var j=0;j<bottomimgs.length;j++){
             if(i==j){
-                bottomimgs[j].src="/template/images/icon_1.gif";
+                bottomimgs[j].src="<?php echo base_url()?>/template/images/icon_1.gif";
             }else{
-                bottomimgs[j].src="/template/images/icon_0.gif";
+                bottomimgs[j].src="<?php echo base_url()?>/template/images/icon_0.gif";
             }
         }
 

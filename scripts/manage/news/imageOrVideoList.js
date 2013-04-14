@@ -16,6 +16,7 @@ ImageOrVideoList.prototype={
             pagination : true,
             sortName : 'createtime',
             fitColumns : true,
+            height:'600',
             url : global._prefix+"/manage/news/initData",
             queryParams:{menuid:_this.menuid},
             frozenColumns : [ [ {

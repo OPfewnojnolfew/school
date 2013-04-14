@@ -31,6 +31,7 @@ ImageList.prototype = {
             sortName: 'createtime',
             sortOrder: 'desc',
             fitColumns: true,
+            height:'600',
             url: global._prefix + "/manage/news/initDataImageOrVideo",
             queryParams: {menuid: _this.menuid},
             columns: [
@@ -78,6 +79,18 @@ ImageList.prototype = {
             },
             onClickRow: function (rowIndex) {
                 $(this).datagrid("unselectRow", rowIndex);
+            },
+            onDblClickRow: function (rowIndex, rowData) {
+                _this.id = rowData.id;
+                _this.title.val(rowData.title);
+                _this.editor.setContent(rowData.content, false);
+                if (rowData.attachmentID !== null) {
+                    _this.attachmentPath = rowData.attachmentPath;
+                    _this.attachmentID = rowData.attachmentID;
+                    _this.attachmentName = rowData.attachmentName;
+                    _this.viewImage.html("<img src='" + global._prefix + "/" + rowData.attachmentPath + "' alt='" + rowData.attachmentName + "'>");
+                }
+                _this.dialog.window("open");
             }
         });
     },
