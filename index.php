@@ -18,7 +18,7 @@ header("Content-type:text/html;charset=utf-8");
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', 'production');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -190,7 +190,12 @@ if (defined('ENVIRONMENT'))
 
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
-
+function utf8Substr($str, $from, $len)
+{
+    return preg_replace('#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$from.'}'.
+            '((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
+        '$1',$str);
+}
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

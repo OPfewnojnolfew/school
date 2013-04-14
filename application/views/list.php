@@ -19,8 +19,22 @@
                             </td>
                         </tr>
                     </table>
+                   <?php if(isset($child['children'])):?>
+                    <table width="98%" border="0" cellspacing="0" cellpadding="0" id="LM1" style="display:''">
+                        <tbody>
+                        <?php foreach($child['children'] as $val):?>
+
+                         <tr>
+                            <td width="29" align="right">- </td>
+                            <td align="left"><a href="<?php echo base_url('category/index/' . $val['id']) ?>" class="list_left"> &nbsp;<?php echo $val['name']; ?></a></td>
+                        </tr>
+
+                    <?php endforeach;?>
+                    </tbody></table>
+                    <?php else: ?>
                     <table width="98%" border="0" cellspacing="0" cellpadding="0" id="LM2"   style="display:none" >
                     </table>
+                    <?php endif;?>
                 <?php
                 endforeach;
                 ?>

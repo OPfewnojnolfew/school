@@ -12,7 +12,10 @@
     <div class="head">
         <table width="100%" height="209" border="0" cellpadding="0" cellspacing="0">
             <tr>
-                <td height="173"><p style="text-align: center"><embed src="<?php echo base_url('/template/top.swf');?>" width="980" height="173" type="application/x-shockwave-flash" play="true" loop="true" menu="true" wmode="opaque"></embed></p></td>
+                <td height="173"><p style="text-align: center">
+                    <!--    <embed src="<?php /*echo base_url('/template/top.jpg');*/?>" width="980" height="173" type="application/x-shockwave-flash" play="true" loop="true" menu="true" wmode="opaque"></embed>-->
+                        <img src="<?php echo base_url('/template/top.jpg');?>" width="980" height="173"  />
+                    </p></td>
             </tr>
             <tr>
                 <td height="35" background="<?php echo base_url('/template/images/i_2.gif');?>"><table width="100%" height="36" border="0" cellpadding="0" cellspacing="0" class="dh">

@@ -49,17 +49,7 @@
 </tr>
 </table>
 </div>
-<div class="mid_m"><!-- #BeginLibraryItem "/Library/footer.lbi" --><div  id="footer">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="10" height="111" background="<?php echo base_url('/template/images/f_left.gif');?>"></td>
-                <td align="center" background="<?php echo base_url('/template/images/f_mid.gif');?>" class="footer">您是第 <span style="color:#f2fb03">2360276</span> 位访问者<br />
-                    版权所有 共青团浙江大学委员会  技术支持 <a href="http://www.cgsoft.com.cn">创高软件</a> <a href="http://www.youth.zju.edu.cn/old">旧版网站</a> <a href="/wescms" target="_blank">管理登录</a><br/>
-                    地址：浙江大学紫金港校区小剧场B座317室 邮编：310058 电话：0571-88206671 传真：0571-88206672  </td>
-                <td width="10" background="<?php echo base_url('/template/images/f_end.gif');?>"></td>
-            </tr>
-        </table>
-    </div><!-- #EndLibraryItem --></div>
+<?php $this->load->view('foot') ?>
 </div>
 
 </div>
